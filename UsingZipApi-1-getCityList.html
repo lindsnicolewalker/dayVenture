@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>hi</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   
+</head>
+<body>
+<script type="text/javascript">
+var sGeobytesLocationCode="";
+var sGeobytesIsLocationMatch=false;
+var sGeobytesCountry="";
+var sGeobytesCity="";
+
+console.log();
+jQuery.getJSON(
+	"http://getnearbycities.geobytes.com/GetNearbyCities?callback=?&radius=100&limit=25&locationcode="+sGeobytesLocationCode,
+		 function (data) {
+		     drawNbcTable(data);
+             console.log("data from jquery.GetJSON is below: ");
+             console.log(data);		
+		 }
+	 );
+
+// Some APIs will give us a cross-origin (CORS) error. This small function is a fix for that error. You can also check out the chrome extenstion (https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en).
+jQuery.ajaxPrefilter(function (options) {
+  if (options.crossDomain && jQuery.support.cors) {
+    options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
+  }
+});
+
+var cityFromZipApi="";
+var cityDistanceFromHere="";
+
+jQuery.getJSON(
+    "https://www.zipcodeapi.com/rest/fBPSu90menTPyiiwthbSbkzQ6zmVcDelh42nY2CUtRbEkaOJ4u16dV3l3XWoEaEE/radius.json/94122/65/mile",
+         function(zipData){
+             console.log("data from ZIP API is below: ");
+             console.log(zipData);
+         }
+)
+
+function drawNbcTable(data) {
+    var row = $("<tr /><th>Miles</th><th>Kms</th><th>City</th><th>Bearing</th><th>Direction</th>");
+    $("#geobytesnearbycities").html(row); 
+    for (var i = 0; i < data.length; i++) {
+        drawNbcRow(data[i]);
+    }
+}
+
+function drawNbcRow(rowData) {
+    var row = $("<tr />");
+    $("#geobytesnearbycities").append(row); 
+    row.append($("<td>" + rowData[11] + "</td>"));
+    row.append($("<td>" + rowData[7] + "</td>"));
+    row.append($("<td>" + rowData[1]+ "</td>"));
+    row.append($("<td>" + rowData[0] + "</td>"));
+    row.append($("<td>" + rowData[4] + "</td>"));
+}
+
+function drawZipApiTable(zipData){
+    var rowFromZipApi=$("<tr /><th>Miles</th><th>City</th>");
+    $("#zipApiCities").html(rowFromZipApi);
+    for var (var i=0; i<zipData.length;i++){
+        drawZipApiRow(zipData[i]);
+    }
+
+}
+
+
+function drawZipApiRow(zipRowData){}
+
+</script>
+ <table id="geobytesnearbycities">
+        <tr>
+            <td><b>Mi</b></td>
+            <td><b>Km</b></td>
+            <td><b>City</b></td>
+            <td><b>Bearing</b></td>
+            <td><b>Direction</b></td>
+        </tr>
+    </table>
+
+    <table id="zipApiCities">
+        <tr>
+            <td><b>Distance Mi</b></td>
+            <td><b>City</b></td>
+        </tr>
+    </table>    
+
+</body>
+</html>
