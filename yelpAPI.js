@@ -1,3 +1,19 @@
+
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCLn3kgPLJpalQ9LC4DR2lkQvEohkAIe3k",
+    authDomain: "blazeit-22443.firebaseapp.com",
+    databaseURL: "https://blazeit-22443.firebaseio.com",
+    projectId: "blazeit-22443",
+    storageBucket: "blazeit-22443.appspot.com",
+    messagingSenderId: "784716485493"
+  };
+  firebase.initializeApp(config);
+
+
+var database = firebase.database();
+
+
 //YELP KEY
 
 // Client ID
@@ -157,54 +173,62 @@ $(document).ready(function () {
 
       //click activity only logs a click, so we need to distinguish between clicking an item the first time and clicking it subsequent times.
       // var owlItemState = $(".owl-item").hasClass("checked");
-      
+
       // console.log(owlItemState)
 
-      if ( $(".owl-item").hasClass("checked") ) {
+      if ($(this).hasClass("checked")) {
 
-      //grab the info from the checked activity
-      //title
-      var titleFB = $(this).next().find("img").attr("alt");
-      console.log(titleFB)
+        //grab the info from the checked activity
+        //title
+        var titleFB = $(this).next().find("img").attr("alt");
+        console.log(titleFB)
+
+        //image URL
+        var imageFB = $(this).next().find("img").attr("src");
+        console.log(imageFB)
+
+        //link to activity
+        var linkFB = $(this).next().find("a").attr("href");
+        console.log(linkFB)
+
+        //cost
+
+        //rating
+        var ratingFB = $(this).next().find("p").attr("data-rating");
+        console.log(ratingFB)
+
+        //address
+        // var addressFB $(this).next().find("a").attr("href")
+
+        var eventIDFB = $(this).next().find("a").attr("href");
+
+        var funActivity = {
+          eventID: eventIDFB,
+          title: titleFB,
+          image: imageFB,
+          link: linkFB,
+          // cost: costFB,
+          rating: ratingFB,
+          // address: addressFB
+        }
+
+        console.log(funActivity)
+        
+        database.ref().set({
+          funActivity
+        
+        //end of database ref set
+        });
       
-      //image URL
-      var imageFB = $(this).next().find("img").attr("src");
-      console.log(imageFB)
-      
-      //link to activity
-      var linkFB = $(this).next().find("a").attr("href");
-      console.log (linkFB)
+        //end of owl item click "IF" statement
+      };
 
-      //cost
-
-      //rating
-      var ratingFB = $(this).next().find("p").attr("data-rating");
-      console.log(ratingFB)
-
-      //address
-      // var addressFB $(this).next().find("a").attr("href")
-
-      var funActivity = {
-        title: titleFB,
-        image: imageFB,
-        link: linkFB,
-        // cost: costFB,
-        rating: ratingFB,
-        // address: addressFB
-      }
-    
-      console.log (funActivity)
-
-    }
-
-    });
-
-    
-  })
+      //end of click activity
+    })
 
 
+    //end of ajax response
+  });
 
+//end of document ready
 });
-
-
-
