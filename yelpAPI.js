@@ -69,7 +69,7 @@ $(document).ready(function () {
       var title = response.businesses[i].name;
       //activity type
       var activityType;
-      
+
 
       //image
       var imageURL = response.businesses[i].image_url;
@@ -84,18 +84,20 @@ $(document).ready(function () {
       var rating = response.businesses[i].rating
       // console.log(rating)
 
+      //cost
+
       // address - this response is an array, where each element is a 'line' of an address (usually). Let's leave it for now, but later we will need to interpret it.
       var address = [];
       address = response.businesses[i].location.display_address
       // console.log(address)
 
 
-      
+
 
       // Create a div to display all that sweet data we got
       var displayDiv = $('<div class="card-item">');
 
-      var displayTitle = $("<div>"+ title + "</div>")
+      var displayTitle = $("<div>" + title + "</div>")
       displayTitle.addClass(eventID)
       displayTitle.attr("id", "title")
       displayDiv.append(title, "<br>")
@@ -116,8 +118,14 @@ $(document).ready(function () {
 
       var displayRating = $("<p>");
       displayRating.text("Rated " + rating + " stars on Yelp!")
+      displayRating.attr("data-rating", rating)
       displayRating.addClass(eventID)
       displayDiv.append(displayRating, "<br>")
+
+      // var datButton = $("<button>")
+      // datButton.text("Let's Do It!")
+      // datButton.attr("value", eventID, "id", eventID, "class", "button")
+      // displayDiv.append(datButton)
 
       //FOR NOW going to store the address in the div because it's an array.
 
@@ -147,12 +155,56 @@ $(document).ready(function () {
     $(".owl-item").on("click", function () {
       $(this).toggleClass('checked');
 
-      //grab the info from 
-      var titleFB
-        console.log(titleFB)
-      //   }
+      //click activity only logs a click, so we need to distinguish between clicking an item the first time and clicking it subsequent times.
+      // var owlItemState = $(".owl-item").hasClass("checked");
+      
+      // console.log(owlItemState)
+
+      if ( $(".owl-item").hasClass("checked") ) {
+
+      //grab the info from the checked activity
+      //title
+      var titleFB = $(this).next().find("img").attr("alt");
+      console.log(titleFB)
+      
+      //image URL
+      var imageFB = $(this).next().find("img").attr("src");
+      console.log(imageFB)
+      
+      //link to activity
+      var linkFB = $(this).next().find("a").attr("href");
+      console.log (linkFB)
+
+      //cost
+
+      //rating
+      var ratingFB = $(this).next().find("p").attr("data-rating");
+      console.log(ratingFB)
+
+      //address
+      // var addressFB $(this).next().find("a").attr("href")
+
+      var funActivity = {
+        title: titleFB,
+        image: imageFB,
+        link: linkFB,
+        // cost: costFB,
+        rating: ratingFB,
+        // address: addressFB
+      }
+    
+      console.log (funActivity)
+
+    }
+
     });
 
-  });
+    
+  })
+
+
 
 });
+
+
+
