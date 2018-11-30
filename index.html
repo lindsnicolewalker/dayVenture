@@ -7,9 +7,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     
-    <!-- Link JS -->
-    <link rel="stylesheet" href="assets/javascript/script.js">
+    <!-- Google Fonts  -->
+    <link href="https://fonts.googleapis.com/css?family=Text+Me+One" rel="stylesheet">
+ 
+    <!-- Link AJAX and JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+    <!-- Owl Carousel 2 Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+       
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
@@ -18,15 +28,19 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
         crossorigin="anonymous">
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
+    <!-- Important Owl stylesheets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"/>
 
     <!-- Link CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- <script src="eeventfulAPI.js"></script> -->
+    <script src="yelpAPI.js"></script>
 </head>
 
 <body>
+    <!-- nav bar -->
     <div class="topnav ">
 
         <a class="lindsnav" href="#about">About</a>
@@ -37,45 +51,63 @@
 
 
     </div>
+
+    <!-- video -->
     <div class="vid-container">
         <video style="margin-bottom: 100px;" autoplay muted loop id="myVideo">
             <source src="assets/images/video.mp4" type="video/mp4" width="100%">
             Your browser does not support HTML5 video.
-            <div class="hero-text">
-                <h1>DAYVENTURE</h1>
-                <p>Be one of the first to let dayventure plan your day trip! experience the top rated events in your
-                    area, without all the decision fatigue. Dayventure does the research for you. Just give us your
-                    location so we can find an awesome adventure for you to discover today!! </p>
-            </div>
-
         </video>
-        <div id="about"></div>
-        <img style="margin-top: -100px;" class="logo" src="https://bit.ly/2Q2N1Rb">
+        
+    <!-- marker for nav bar "about" button amooth scroll feature-->
+    <div id="about"></div>
+    
+    <!-- logo -->
+    <img class="logo" src="https://bit.ly/2Q2N1Rb">
+    </div>
+ 
+    <!-- hero text -->
+    <div class="hero-text">
+        <h1>DAYVENTURE</h1>
+        <p>Be one of the first to let dayventure plan your day trip! experience the top rated events in your
+            area, without all the decision fatigue. Dayventure does the research for you. Just give us your
+            location so we can find an awesome adventures and then well set you up with your itinerary and navigation!! 
+        </p>
     </div>
 
+    <!-- marker for nav bar "get started" button smooth scroll feature -->
     <div id="getStarted"></div>
+
+    <!-- first parallax scrolly section -->
     <div style="position:relative;">
         <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify; ">
             <p>
                 <h1>Get Started!</h1>
                 <h6>First, tell us where you are...</h6>
             </p>
-            <div class="search-container">
-                <form class="display-flex lindsform" action="/action_page.php">
-                    <input type="text" placeholder="zipcode" name="search">
-                    <button type="submit">Submit</button>
-                    <!-- on submit click the results carousel populates with location based results -->
-                </form>
-            </div>
+        
+        <!-- zip code input field -->
+        <div class="zipcode-container">
+            <form class="display-flex lindsform" action="/action_page.php">
+                <input type="text" placeholder="zipcode" name="search">
+                <button style ="color:black;"type="submit">Submit</button>
+                <!-- on submit click the results carousel populates with location based results -->
+
+
+            </form>
         </div>
     </div>
 
+    <!-- first background image of parallax: female hiker -->
     <div class="image1">
-        <div class="caption">
-        </div>
+        <div class="caption">write something here</div>
     </div>
-
+    
+    <!-- marker for nav bar "top rated" button smooth scroll feature -->
+    <!-- defaultpopulate carousel with top rated cities, top rated events, maybe make a new parallax section for it -->
     <div id="defaultCarousel"></div>
+
+    <!-- second parallax scrolly section -->
     <div style="position:relative;">
         <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
             <p>
@@ -83,15 +115,27 @@
                 <h6>click GO when you're ready and we will display your itinerary for the day...</h6>
             </p>
             <!-- on "go" button click populate itinerary and move page down to iterary div using html smooth scrolling -->
+        
+                <!-- carousel -->
+                <div id="yelp-results"></div>
+                <div id="eventful-results"></div>
+                <div id ="carousel-container"></div>
+              
+            <div id ="carousel-container"></div>
+
         </div>
     </div>
 
+    <!-- second background image of parallax: people having coffee -->
     <div class="image2">
         <div class="caption">
         </div>
     </div>
 
+    <!-- marker for nav bar "itinerary" button smooth scroll feature -->
     <div id="itinerary"></div>
+    
+    <!-- third parallax scrolly section -->
     <div style="position:relative;">
         <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
             <p>
@@ -102,32 +146,32 @@
         </div>
     </div>
 
+    <!-- third parallax background image: restaurant" -->
     <div class="image3">
         <div class="caption">
         </div>
     </div>
 
+    <!-- marker for nav bar "testimonials" button/ could replace with navigation -->
     <div id="testimonials"></div>
+
+    <!-- fourth parallax scrolly section -->
     <div style="position:relative;">
         <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
             <p>
                 <h1>testimonials</h1>
                 <h6>we'll get you to your adventure!</h6>
-                <!-- carousel for testimonials -->
+                <!-- carousel for testimonials or section for navigation-->
             </p>
-
         </div>
     </div>
 
-
+    <!-- fourth parallax background image: concert -->
     <div class="image0">
         <div class="caption">
         </div>
     </div>
 
-    <div id="test"></div>
-
-    <script src="assets/javascript/script.js"></script>
 </body>
 
 </html>
