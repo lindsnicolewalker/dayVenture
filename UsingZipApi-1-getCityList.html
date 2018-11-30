@@ -32,14 +32,19 @@ jQuery.ajaxPrefilter(function (options) {
   }
 });
 
-var cityFromZipApi="";
-var cityDistanceFromHere="";
+// var cityFromZipApi="";
+// var cityDistanceFromHere="";
 
 jQuery.getJSON(
     "https://www.zipcodeapi.com/rest/fBPSu90menTPyiiwthbSbkzQ6zmVcDelh42nY2CUtRbEkaOJ4u16dV3l3XWoEaEE/radius.json/94122/65/mile",
          function(zipData){
              console.log("data from ZIP API is below: ");
              console.log(zipData);
+             drawZipApiTable(zipData);
+             console.log("if this is printed drawZipApiTable should have ran");
+             console.log("BELOW: SJ");
+             console.log(zipData.zip_codes[0].city);
+            //key to object nav ^^
          }
 )
 
@@ -63,15 +68,33 @@ function drawNbcRow(rowData) {
 
 function drawZipApiTable(zipData){
     var rowFromZipApi=$("<tr /><th>Miles</th><th>City</th>");
+    console.log("now inside drawZipApiTable");
     $("#zipApiCities").html(rowFromZipApi);
-    for var (var i=0; i<zipData.length;i++){
-        drawZipApiRow(zipData[i]);
+    for (var i=0; i < zipData.zip_codes.length; i++){
+        drawZipApiRow(zipData.zip_codes[i]);
+        console.log("current zipData element is");
+        console.log(zipData.zip_codes[i].city);
+        
     }
 
 }
 
+// {
+//     "zip_codes": [
+//         {
+//             "zip_code": "95067",
+//             "distance": 59.953,
+//             "city": "Scotts Valley",
+//             "state": "CA"
+//         },
 
-function drawZipApiRow(zipRowData){}
+function drawZipApiRow(zipRowData){
+    var zipRow = $("<tr />");
+    $("#zipApiCities").append(zipRow);
+    zipRow.append($("<td>"+zipRowData.city+"</td>"));
+    zipRow.append($("<td>"+zipRowData.distance+"</td>"));
+    console.log("drawZipApiRow just Ran  ");
+}
 
 </script>
  <table id="geobytesnearbycities">
@@ -86,7 +109,7 @@ function drawZipApiRow(zipRowData){}
 
     <table id="zipApiCities">
         <tr>
-            <td><b>Distance Mi</b></td>
+            <td><b>Distance (miles)</b></td>
             <td><b>City</b></td>
         </tr>
     </table>    
