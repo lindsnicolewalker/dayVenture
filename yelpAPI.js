@@ -34,6 +34,8 @@ $(document).ready(function () {
   //our key for yelp API
   var yelpKey = "93-sQptypfHJJ-zn2q1fOKSujEsPzhm_gVzq-5g7q_P1G4TIsuM7G126ydE37pmuFcd4o2t-_a8pkiBHZV6Rt1eRkcfzMmOJ5OIFZwsFPvrkjFHdcNEYo1_JBiMAXHYx";
 
+
+  
   //later, this will be grabbed from the users location. for now, let's use San Francisco"
   var where = "San+Francisco";
 
@@ -181,27 +183,29 @@ $(document).ready(function () {
         //grab the info from the checked activity
         //title
         var titleFB = $(this).next().find("img").attr("alt");
-        console.log(titleFB)
+        // console.log(titleFB)
 
         //image URL
         var imageFB = $(this).next().find("img").attr("src");
-        console.log(imageFB)
+        // console.log(imageFB)
 
         //link to activity
         var linkFB = $(this).next().find("a").attr("href");
-        console.log(linkFB)
+        // console.log(linkFB)
 
         //cost
 
         //rating
         var ratingFB = $(this).next().find("p").attr("data-rating");
-        console.log(ratingFB)
+        // console.log(ratingFB)
 
         //address
         // var addressFB $(this).next().find("a").attr("href")
 
         var eventIDFB = $(this).next().find("a").attr("href");
+        console.log(eventIDFB)
 
+    
         var funActivity = {
           eventID: eventIDFB,
           title: titleFB,
@@ -212,7 +216,7 @@ $(document).ready(function () {
           // address: addressFB
         }
 
-        console.log(funActivity)
+        // console.log(funActivity)
         
         database.ref().set({
           funActivity
