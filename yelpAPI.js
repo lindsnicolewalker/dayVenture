@@ -57,7 +57,6 @@ $.ajax({
   // response = JSON.parse(response)
   console.log(response)
 
-
   //shorten our path to getting the data we want, incorporating the ability to use a for loop in the future:
   var carousel = $('<div id="owl-demo" class="owl-carousel owl-theme">');
 
@@ -87,7 +86,7 @@ $.ajax({
 
    
 // Owl Carousel starts here
-    var displayDiv = $('<div>');
+    var displayDiv = $('<div class="card-item">');
     displayDiv.append(title, "<br>")
 
     var displayImage = $("<img>")
@@ -106,17 +105,20 @@ $.ajax({
 
    carousel.append(displayDiv);
 
+
   }
   $("#carousel-container").html(carousel);
-  
+
   $("#owl-demo").owlCarousel({
     items: 3,
     dots: false,
     nav: true
 });
 
+$(".owl-item").on("click", function(){
+  $(this).addClass('checked');
 });
 
-
+});
 
 });
