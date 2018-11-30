@@ -57,7 +57,7 @@ $("#ADD-TO-ITENERAY").on("click", function (event) {
   event.preventDefault();
 
   // Get the input values
-  
+
   //-title
   //-image (or stock photo)
   //-link
@@ -84,17 +84,9 @@ $("#ADD-TO-ITENERAY").on("click", function (event) {
     address: addressFB
   }
 
-  // Log the Bidder and Price (Even if not the highest)
-  console.log(bidderPrice);
-  console.log(initialBidder);
 
-  if (bidderPrice > highPrice) {
-
-    // Alert
-    alert("You are now the highest bidder.");
-
-    // Save the new price in Firebase
-    database.ref().set({
-      highPrice: bidderPrice,
-      highBidder: initialBidder,
-    })
+  // Save the new price in Firebase
+  database.ref().set({
+    funActivity
+  });
+});
