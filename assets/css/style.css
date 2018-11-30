@@ -34,9 +34,12 @@ html {
 }
 
 .topnav {
+  position: absolute;
+  z-index: 1    ;
   overflow: hidden;
   background-color:transparent;
   display: flex;
+
 }
 
 .topnav a {
@@ -47,6 +50,7 @@ html {
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
+
 }
 
 .topnav a:hover {
@@ -148,6 +152,7 @@ html {
 }
 
 .logo{
+  display:none; 
   position:absolute; 
   top: 70%;
   left: 50%; 
@@ -212,9 +217,14 @@ html {
 
 /* ZOE CAROUSEL */
 
-img{
-    max-height: 300px
+.owl-next{
+  float:right; 
+  transform: translateY(200px);
+}
 
+.owl-prev{
+  float:left; 
+  transform: translateY(200px);
 }
 
 #owl-demo .item {
@@ -235,13 +245,39 @@ img{
 
 }
 
-#owl-demo .item img {
-  display: block;
-  width: 50%;
-  height: auto;
+.owl-carousel .owl-item img{
+  position:absolute; 
+  max-width:300px !important ;
+  width: 100% !important;
+  /* height: auto !important;  */
+  clip: rect(0px,200px,200px,0px);
+  border-style:dashed; 
+  border-color: white; 
 
 }
 
+.owl-item{
+height: 300px; 
+
+}
+
+/* #owl-demo .item img {
+  display: block;
+  width: 50%;
+  height: auto;
+  
+
+} */
+.card-item p{
+    position: absolute;
+  top: 230px;
+}
+
+
+.card-item a{
+  position: absolute;
+  top: 250px;
+}
 .owl-theme .owl-controls .owl-page {
   display: inline-block;
 
