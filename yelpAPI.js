@@ -116,7 +116,7 @@ $.ajax({
 });
 
 $(".owl-item").on("click", function(){
-  $(this).addClass('checked');
+  $(this).toggleClass('checked');
 });
 
 });
