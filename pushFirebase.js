@@ -90,3 +90,7 @@ $("#ADD-TO-ITENERAY").on("click", function (event) {
     funActivity
   });
 });
+
+
+//As options are selected, pull their data objects out of firebase and pre-load them on to the itenerary
+

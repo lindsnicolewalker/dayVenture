@@ -57,7 +57,7 @@ $(document).ready(function () {
     // response = JSON.parse(response)
     console.log(response)
 
-    //shorten our path to getting the data we want, incorporating the ability to use a for loop in the future:
+    //make the owl carousel
     var carousel = $('<div id="owl-demo" class="owl-carousel owl-theme">');
 
     for (var i = 0; i < response.businesses.length; i++) {
@@ -69,6 +69,7 @@ $(document).ready(function () {
       var title = response.businesses[i].name;
       //activity type
       var activityType;
+      
 
       //image
       var imageURL = response.businesses[i].image_url;
@@ -86,20 +87,23 @@ $(document).ready(function () {
       // address - this response is an array, where each element is a 'line' of an address (usually). Let's leave it for now, but later we will need to interpret it.
       var address = [];
       address = response.businesses[i].location.display_address
-      console.log(address)
+      // console.log(address)
 
 
+      
 
-      // Owl Carousel starts here
+      // Create a div to display all that sweet data we got
       var displayDiv = $('<div class="card-item">');
 
-      var displayTitle = $("<a>")
-      displayTitle.text(title)
+      var displayTitle = $("<div>"+ title + "</div>")
       displayTitle.addClass(eventID)
+      displayTitle.attr("id", "title")
       displayDiv.append(title, "<br>")
 
       var displayImage = $("<img>")
       displayImage.attr("src", imageURL)
+      displayImage.attr("alt", title)
+      displayImage.attr("id", "image")
       displayImage.addClass(eventID)
       displayImage.appendTo(displayDiv);
 
@@ -124,10 +128,12 @@ $(document).ready(function () {
       // storeAddress.attr("data-address",  address)
       // displayDiv.append(storeAddress, "<br>")
 
+      //populate the Owl carousel with the display div we created
       carousel.append(displayDiv);
 
 
     }
+
     $("#carousel-container").html(carousel);
 
     $("#owl-demo").owlCarousel({
@@ -136,10 +142,15 @@ $(document).ready(function () {
       nav: true
     });
 
+
+    // on click of event, display that event has been selected and grab it's data
     $(".owl-item").on("click", function () {
       $(this).toggleClass('checked');
 
-
+      //grab the info from 
+      var titleFB
+        console.log(titleFB)
+      //   }
     });
 
   });
