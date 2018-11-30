@@ -35,7 +35,7 @@ $(document).ready(function () {
   var yelpKey = "93-sQptypfHJJ-zn2q1fOKSujEsPzhm_gVzq-5g7q_P1G4TIsuM7G126ydE37pmuFcd4o2t-_a8pkiBHZV6Rt1eRkcfzMmOJ5OIFZwsFPvrkjFHdcNEYo1_JBiMAXHYx";
 
 
-  
+
   //later, this will be grabbed from the users location. for now, let's use San Francisco"
   var where = "San+Francisco";
 
@@ -234,5 +234,51 @@ $(document).ready(function () {
     //end of ajax response
   });
 
+
+  
+  
 //end of document ready
+});
+
+
+database.ref().on("child_added", function(childSnapshot) {
+
+  var fireTitle = childSnapshot.val().title;
+  var fireEventID = childSnapshot.val().eventID;
+  var fireImageURL = childSnapshot.val().image;
+  var fireLink = childSnapshot.val().link;
+  var fireRating = childSnapshot.val().rating;
+
+// console.log (fireTitle)
+
+  var itineraryDiv = $('<div>');
+
+  var itineraryTitle = $("<div>" + fireTitle + "</div>")
+  itineraryTitle.attr("id", "fireTitle")
+  itineraryDiv.append(fireTitle, "<br>")
+
+  var itineraryImage = $("<img>")
+  itineraryImage.attr("src", fireImageURL)
+  itineraryImage.attr("alt", fireTitle)
+  itineraryImage.attr("id", "image")
+  itineraryImage.appendTo(itineraryDiv);
+
+  var itineraryLink = $("<a>");
+  itineraryLink.attr("href", fireLink)
+  itineraryLink.text("Link: " + fireTitle)
+  itineraryDiv.append(itineraryLink, "<br>")
+
+  var itineraryRating = $("<p>");
+  itineraryRating.text("Rated " + fireRating + " stars on Yelp!")
+  itineraryRating.attr("data-fire-rating", fireRating)
+  itineraryDiv.append(itineraryRating, "<br>")
+
+
+  $("#itinerary-display").append(itineraryDiv)
+
+
+
+ // Handle the errors
+}, function(errorObject) {
+  console.log("Errors handled: " + errorObject.code);
 });
