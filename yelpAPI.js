@@ -10,8 +10,8 @@
   };
   firebase.initializeApp(config);
 
-
 var database = firebase.database();
+
 
 
 //YELP KEY
@@ -35,12 +35,12 @@ $(document).ready(function () {
   var yelpKey = "93-sQptypfHJJ-zn2q1fOKSujEsPzhm_gVzq-5g7q_P1G4TIsuM7G126ydE37pmuFcd4o2t-_a8pkiBHZV6Rt1eRkcfzMmOJ5OIFZwsFPvrkjFHdcNEYo1_JBiMAXHYx";
 
 
-  
+
   //later, this will be grabbed from the users location. for now, let's use San Francisco"
   var where = "San+Francisco";
 
   //search terms
-  var query = "party"
+  var query = "events"
 
   // categories string
 
@@ -54,14 +54,6 @@ $(document).ready(function () {
     "&sort_by=" + sorted +
     "&open_now=true" +
     "&attribute=hot_and_new";
-
-  // var yelpQueryURL = "https://api.yelp.com/v3/businesses/";
-
-  //   var searchRequest ={
-  //     location: where,
-  //     term: query,
-  //   }
-
 
   $.ajax({
     url: yelpQueryURL,
@@ -81,13 +73,11 @@ $(document).ready(function () {
     for (var i = 0; i < response.businesses.length; i++) {
 
       //Event ID to track events internally
-      var eventID = "eventIDyelp" + [i]
+      //Events from this API will be a number starting at 1000. Another API could be 2000+, another 3000+ and so on.
+      var eventID = (1000 + parseInt([i]))
 
       //Event Title
       var title = response.businesses[i].name;
-      //activity type
-      var activityType;
-
 
       //image
       var imageURL = response.businesses[i].image_url;
@@ -96,6 +86,7 @@ $(document).ready(function () {
       //event URL
       var link = response.businesses[i].url
       // console.log(link)
+
       //   var cost;
 
       //    rating;
@@ -109,22 +100,27 @@ $(document).ready(function () {
       address = response.businesses[i].location.display_address
       // console.log(address)
 
-
+      //Create a div to store all the data in one place
+      var dataDiv = $("<data class='data-storage'>");
+      dataDiv.attr("data-ID", eventID);
+      dataDiv.attr("data-title", title);
+      dataDiv.attr("data-image-URL", imageURL);
+      dataDiv.attr("data-link-URL", link);
+      dataDiv.attr("data-rating", rating);
 
 
       // Create a div to display all that sweet data we got
       var displayDiv = $('<div class="card-item">');
-      displayDiv.attr("id", eventID);
-
+    
       var displayTitle = $("<div>" + title + "</div>")
-      displayTitle.attr("id", "title")
-      displayDiv.append(title, "<br>")
+      displayTitle.addClass("title")
+      displayDiv.append(displayTitle, "<br>")
 
       var displayImage = $("<img>")
       displayImage.attr("src", imageURL)
       displayImage.attr("alt", title)
-      displayImage.appendTo(displayDiv);
-
+      displayImage.addClass("event-image")
+      displayDiv.append(displayImage);
 
       var displayLink = $("<a>");
       displayLink.attr("href", link)
@@ -133,14 +129,11 @@ $(document).ready(function () {
 
       var displayRating = $("<p>");
       displayRating.text("Rated " + rating + " stars on Yelp!")
-      displayRating.attr("data-rating", rating)
       displayDiv.append(displayRating, "<br>")
 
-      // var datButton = $("<button>")
-      // datButton.text("Let's Do It!")
-      // datButton.attr("value", eventID, "id", eventID, "class", "button")
-      // displayDiv.append(datButton)
+      displayDiv.append(dataDiv)
 
+      
       //FOR NOW going to store the address in the div because it's an array.
 
       //Store the address in the card, but don't display it
@@ -166,16 +159,17 @@ $(document).ready(function () {
 
     // on click of event, display that event has been selected and grab it's data
     $(".owl-item").on("click", function () {
-      
 
-      //click activity only logs a click, so we need to distinguish between clicking an item the first time and clicking it subsequent times.
+      // Bypassing the toggle functionality
+      // $(this).toggleClass('checked');
+
+     //click activity only logs a click, so we need to distinguish between clicking an item the first time and clicking it subsequent times.
       // var owlItemState = $(".owl-item").hasClass("checked");
-
       // console.log(owlItemState)
+
 
       if ($(this).hasClass("checked")) {
         $(this).removeClass('checked');
-
 
         // To remove the entry for checkmark unchecked (by ZOE)
         var query = firebase.database().ref("events");
@@ -187,12 +181,8 @@ $(document).ready(function () {
           });
         }));
 
-        
-        
+ // console.log(funActivity)
 
-
-        // console.log(funActivity)
-        
 /*         database.ref().set({
           funActivity
         
@@ -205,33 +195,31 @@ $(document).ready(function () {
 
         //grab the info from the checked activity
         //title
-        var titleFB = $(this).next().find("img").attr("alt");
+        var titleFB = $(this).find("data").attr("data-title");
         // console.log(titleFB)
 
         //image URL
-        var imageFB = $(this).next().find("img").attr("src");
+        var imageFB = $(this).find("data").attr("data-image-URL");
         // console.log(imageFB)
 
         //link to activity
-        var linkFB = $(this).next().find("a").attr("href");
+        var linkFB = $(this).find("data").attr("data-link-URL");
         // console.log(linkFB)
 
         //cost
 
         //rating
-        var ratingFB = $(this).next().find("p").attr("data-rating");
+        var ratingFB = $(this).find("data").attr("data-rating");
         // console.log(ratingFB)
 
         //address
-        // var addressFB $(this).next().find("a").attr("href")
+        // var addressFB $(this).find("a").attr("href")
 
-        var eventIDFB = $(this).find(".card-item").attr("id");
+        var eventIDFB = $(this).find("data").attr("data-id");
         console.log(eventIDFB)
 
 
-    
-       
-        database.ref().child('events').push({
+              database.ref().child('events').push({
           eventID: eventIDFB,
           title: titleFB,
           image: imageFB,
@@ -239,24 +227,67 @@ $(document).ready(function () {
           // cost: costFB,
           rating: ratingFB,
           // address: addressFB
+        
         });
+        // console.log(funActivity)
+        
+        // database.ref().set({
+        //   funActivity
+        
+        // //end of database ref set
+        // });
+      
+        //end of owl item click "IF" statement
       };
       
-
-
-
-        // Push truck data to the database
-
-    // Create Firebase event for adding truck to the database
-        
-      
-
       //end of click activity
     })
 
-
     //end of ajax response
   });
-
+  
 //end of document ready
+});
+
+
+database.ref("/events").on("child_added", function(childSnapshot) {
+
+  var fireTitle = childSnapshot.val().title;
+  var fireEventID = childSnapshot.val().eventID;
+  var fireImageURL = childSnapshot.val().image;
+  var fireLink = childSnapshot.val().link;
+  var fireRating = childSnapshot.val().rating;
+
+console.log (fireTitle)
+
+  var itineraryDiv = $('<div>');
+
+  var itineraryTitle = $("<div>" + fireTitle + "</div>")
+  itineraryTitle.attr("id", "fireTitle")
+  itineraryDiv.append(fireTitle, "<br>")
+
+  var itineraryImage = $("<img>")
+  itineraryImage.attr("src", fireImageURL)
+  itineraryImage.attr("alt", fireTitle)
+  itineraryImage.addClass("itinerary-image")
+  itineraryDiv.append(itineraryImage); 
+
+  var itineraryLink = $("<a>");
+  itineraryLink.attr("href", fireLink)
+  itineraryLink.text("Link: " + fireTitle)
+  itineraryDiv.append(itineraryLink, "<br>")
+
+  var itineraryRating = $("<p>");
+  itineraryRating.text("Rated " + fireRating + " stars on Yelp!")
+  itineraryRating.attr("data-fire-rating", fireRating)
+  itineraryDiv.append(itineraryRating, "<br>")
+
+
+  $("#itinerary-display").append(itineraryDiv)
+
+
+
+ // Handle the errors
+}, function(errorObject) {
+  console.log("Errors handled: " + errorObject.code);
 });
