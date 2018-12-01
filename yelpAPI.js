@@ -163,7 +163,7 @@ $(document).ready(function () {
       // Bypassing the toggle functionality
       // $(this).toggleClass('checked');
 
-      //click activity only logs a click, so we need to distinguish between clicking an item the first time and clicking it subsequent times.
+     //click activity only logs a click, so we need to distinguish between clicking an item the first time and clicking it subsequent times.
       // var owlItemState = $(".owl-item").hasClass("checked");
       // console.log(owlItemState)
 
@@ -182,7 +182,7 @@ $(document).ready(function () {
         }));
 
  // console.log(funActivity)
-        
+
 /*         database.ref().set({
           funActivity
         
@@ -218,8 +218,8 @@ $(document).ready(function () {
         var eventIDFB = $(this).find("data").attr("data-id");
         console.log(eventIDFB)
 
-    
-        database.ref().child('events').push({
+
+              database.ref().child('events').push({
           eventID: eventIDFB,
           title: titleFB,
           image: imageFB,
