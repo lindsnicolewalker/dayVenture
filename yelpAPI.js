@@ -114,30 +114,26 @@ $(document).ready(function () {
 
       // Create a div to display all that sweet data we got
       var displayDiv = $('<div class="card-item">');
+      displayDiv.attr("id", eventID);
 
       var displayTitle = $("<div>" + title + "</div>")
-      displayTitle.addClass(eventID)
       displayTitle.attr("id", "title")
       displayDiv.append(title, "<br>")
 
       var displayImage = $("<img>")
       displayImage.attr("src", imageURL)
       displayImage.attr("alt", title)
-      displayImage.attr("id", "image")
-      displayImage.addClass(eventID)
       displayImage.appendTo(displayDiv);
 
 
       var displayLink = $("<a>");
       displayLink.attr("href", link)
       displayLink.text("Link: " + title)
-      displayLink.addClass(eventID)
       displayDiv.append(displayLink, "<br>")
 
       var displayRating = $("<p>");
       displayRating.text("Rated " + rating + " stars on Yelp!")
       displayRating.attr("data-rating", rating)
-      displayRating.addClass(eventID)
       displayDiv.append(displayRating, "<br>")
 
       // var datButton = $("<button>")
@@ -157,7 +153,6 @@ $(document).ready(function () {
       //populate the Owl carousel with the display div we created
       carousel.append(displayDiv);
 
-
     }
 
     $("#carousel-container").html(carousel);
@@ -171,7 +166,7 @@ $(document).ready(function () {
 
     // on click of event, display that event has been selected and grab it's data
     $(".owl-item").on("click", function () {
-      $(this).toggleClass('checked');
+      
 
       //click activity only logs a click, so we need to distinguish between clicking an item the first time and clicking it subsequent times.
       // var owlItemState = $(".owl-item").hasClass("checked");
@@ -179,6 +174,34 @@ $(document).ready(function () {
       // console.log(owlItemState)
 
       if ($(this).hasClass("checked")) {
+        $(this).removeClass('checked');
+
+
+        // To remove the entry for checkmark unchecked (by ZOE)
+        var query = firebase.database().ref("events");
+        query.once("value", (function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+              var key = childSnapshot.key;
+              database.ref("events").child(key).remove(); 
+              return true;
+          });
+        }));
+
+        
+        
+
+
+        // console.log(funActivity)
+        
+/*         database.ref().set({
+          funActivity
+        
+        //end of database ref set
+        }); */
+      
+        //end of owl item click "IF" statement
+      } else {
+        $(this).addClass('checked');
 
         //grab the info from the checked activity
         //title
@@ -202,11 +225,13 @@ $(document).ready(function () {
         //address
         // var addressFB $(this).next().find("a").attr("href")
 
-        var eventIDFB = $(this).next().find("a").attr("href");
+        var eventIDFB = $(this).find(".card-item").attr("id");
         console.log(eventIDFB)
 
+
     
-        var funActivity = {
+       
+        database.ref().child('events').push({
           eventID: eventIDFB,
           title: titleFB,
           image: imageFB,
@@ -214,18 +239,17 @@ $(document).ready(function () {
           // cost: costFB,
           rating: ratingFB,
           // address: addressFB
-        }
-
-        // console.log(funActivity)
-        
-        database.ref().set({
-          funActivity
-        
-        //end of database ref set
         });
-      
-        //end of owl item click "IF" statement
       };
+      
+
+
+
+        // Push truck data to the database
+
+    // Create Firebase event for adding truck to the database
+        
+      
 
       //end of click activity
     })
