@@ -1,14 +1,14 @@
 
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCLn3kgPLJpalQ9LC4DR2lkQvEohkAIe3k",
-    authDomain: "blazeit-22443.firebaseapp.com",
-    databaseURL: "https://blazeit-22443.firebaseio.com",
-    projectId: "blazeit-22443",
-    storageBucket: "blazeit-22443.appspot.com",
-    messagingSenderId: "784716485493"
-  };
-  firebase.initializeApp(config);
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyCLn3kgPLJpalQ9LC4DR2lkQvEohkAIe3k",
+  authDomain: "blazeit-22443.firebaseapp.com",
+  databaseURL: "https://blazeit-22443.firebaseio.com",
+  projectId: "blazeit-22443",
+  storageBucket: "blazeit-22443.appspot.com",
+  messagingSenderId: "784716485493"
+};
+firebase.initializeApp(config);
 
 var database = firebase.database();
 
@@ -23,6 +23,7 @@ var database = firebase.database();
 // 93-sQptypfHJJ-zn2q1fOKSujEsPzhm_gVzq-5g7q_P1G4TIsuM7G126ydE37pmuFcd4o2t-_a8pkiBHZV6Rt1eRkcfzMmOJ5OIFZwsFPvrkjFHdcNEYo1_JBiMAXHYx
 $(document).ready(function () {
 
+  var iteneraryArray = [];
 
   // Some APIs will give us a cross-origin (CORS) error. This small function is a fix for that error. You can also check out the chrome extenstion (https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en).
   jQuery.ajaxPrefilter(function (options) {
@@ -72,6 +73,14 @@ $(document).ready(function () {
 
     for (var i = 0; i < response.businesses.length; i++) {
 
+      //SUSPENDED UNTIL FIREBASE PIECE WORKS
+      // addYelpActivityToDOM(response.business[i], );
+
+      // //this is a function specific to Yelp's API which will pull out relevant data from the response object and append it to the target div
+      // function addYelpActivityToDOM (responseObject, targetDiv){
+      // }
+
+
       //Event ID to track events internally
       //Events from this API will be a number starting at 1000. Another API could be 2000+, another 3000+ and so on.
       var eventID = (1000 + parseInt([i]))
@@ -111,7 +120,7 @@ $(document).ready(function () {
 
       // Create a div to display all that sweet data we got
       var displayDiv = $('<div class="card-item">');
-    
+
       var displayTitle = $("<div>" + title + "</div>")
       displayTitle.addClass("title")
       displayDiv.append(displayTitle, "<br>")
@@ -133,7 +142,7 @@ $(document).ready(function () {
 
       displayDiv.append(dataDiv)
 
-      
+
       //FOR NOW going to store the address in the div because it's an array.
 
       //Store the address in the card, but don't display it
@@ -163,7 +172,7 @@ $(document).ready(function () {
       // Bypassing the toggle functionality
       // $(this).toggleClass('checked');
 
-     //click activity only logs a click, so we need to distinguish between clicking an item the first time and clicking it subsequent times.
+      //click activity only logs a click, so we need to distinguish between clicking an item the first time and clicking it subsequent times.
       // var owlItemState = $(".owl-item").hasClass("checked");
       // console.log(owlItemState)
 
@@ -171,24 +180,25 @@ $(document).ready(function () {
       if ($(this).hasClass("checked")) {
         $(this).removeClass('checked');
 
-        // To remove the entry for checkmark unchecked (by ZOE)
-        var query = firebase.database().ref("events");
-        query.once("value", (function(snapshot) {
-            snapshot.forEach(function(childSnapshot) {
-              var key = childSnapshot.key;
-              database.ref("events").child(key).remove(); 
-              return true;
-          });
+        $("#itinerary-display").empty()
+
+        // To remove the entry for checkmark unchecked (by ZOE & Lyle)
+        var query = database.ref();
+        //grab the event ID
+        var eventIDremove = $(this).find("data").attr("data-id");
+
+        // iteneraryArray.splice(itneraryArray.indexOf(eventIDremove), 1)
+        // console.log(iteneraryArray)
+
+        query.once("value", (function () {
+
+          database.ref().child(eventIDremove).remove();
+
         }));
 
- // console.log(funActivity)
+    
 
-/*         database.ref().set({
-          funActivity
-        
-        //end of database ref set
-        }); */
-      
+
         //end of owl item click "IF" statement
       } else {
         $(this).addClass('checked');
@@ -216,10 +226,12 @@ $(document).ready(function () {
         // var addressFB $(this).find("a").attr("href")
 
         var eventIDFB = $(this).find("data").attr("data-id");
-        console.log(eventIDFB)
+        // console.log(eventIDFB)
 
+        iteneraryArray.push(eventIDFB)
+        // console.log(iteneraryArray)
 
-              database.ref().child('events').push({
+        database.ref().child(eventIDFB).push({
           eventID: eventIDFB,
           title: titleFB,
           image: imageFB,
@@ -227,38 +239,56 @@ $(document).ready(function () {
           // cost: costFB,
           rating: ratingFB,
           // address: addressFB
-        
+
         });
-        // console.log(funActivity)
-        
-        // database.ref().set({
-        //   funActivity
-        
-        // //end of database ref set
-        // });
-      
-        //end of owl item click "IF" statement
+
+
+        // var keyset = firebase.database().ref("events");
+
+        // keyset.on("child_added", (function (snapshot) {
+
+        //   snapshot.forEach(function (childSnapshot) {
+
+        //     var firebaseKey = childSnapshot.key
+        //     console.log(firebaseKey)
+        //     return true;
+
+        //   });
+
+        // }));
+
       };
-      
+
       //end of click activity
     })
 
     //end of ajax response
   });
-  
-//end of document ready
+
+  //end of document ready
 });
 
+// $("#itinerary-button").on("click", function (event) {
+//   event.preventDefault()
 
-database.ref("/events").on("child_added", function(childSnapshot) {
+// $("#itinerary-display").empty()
 
-  var fireTitle = childSnapshot.val().title;
-  var fireEventID = childSnapshot.val().eventID;
-  var fireImageURL = childSnapshot.val().image;
-  var fireLink = childSnapshot.val().link;
-  var fireRating = childSnapshot.val().rating;
+// for (var i = 0; i < iteneraryArray.length; i++) {
 
-console.log (fireTitle)
+database.ref().on("value", function (childSnapshot) {
+
+
+  //mad props to VIVIAN!!
+  childSnapshot.forEach(function (child) {
+
+    var obj = child.val();
+    console.log(obj);
+    console.log(obj.title);
+    
+    var fireTitle = obj.title;
+  var fireImageURL = obj.image;
+  var fireLink = obj.link;
+  var fireRating = obj.rating;
 
   var itineraryDiv = $('<div>');
 
@@ -270,7 +300,7 @@ console.log (fireTitle)
   itineraryImage.attr("src", fireImageURL)
   itineraryImage.attr("alt", fireTitle)
   itineraryImage.addClass("itinerary-image")
-  itineraryDiv.append(itineraryImage); 
+  itineraryDiv.append(itineraryImage);
 
   var itineraryLink = $("<a>");
   itineraryLink.attr("href", fireLink)
@@ -286,8 +316,12 @@ console.log (fireTitle)
   $("#itinerary-display").append(itineraryDiv)
 
 
+  })
 
- // Handle the errors
-}, function(errorObject) {
+
+  // Handle the errors
+}, function (errorObject) {
   console.log("Errors handled: " + errorObject.code);
 });
+
+
