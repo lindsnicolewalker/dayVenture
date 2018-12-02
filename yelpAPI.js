@@ -97,6 +97,7 @@ $(document).ready(function () {
 
       // Create a div to display all that sweet data we got
       var displayDiv = $('<div class="card-item">');
+      
 
       var displayTitle = $("<div>" + title + "</div>")
       displayTitle.addClass("title")
@@ -145,10 +146,7 @@ $(document).ready(function () {
 
         $(this).removeClass('checked');
 
-        //empty the itinerary div
-        $("#itinerary-display").empty()
-
-        // To remove the entry for checkmark unchecked (by ZOE & Lyle)
+                // To remove the entry for checkmark unchecked (by ZOE & Lyle)
         var query = database.ref();
         //grab the event ID
         var eventIDremove = $(this).find("data").attr("data-id");
@@ -159,54 +157,59 @@ $(document).ready(function () {
 
         }));
 
+        var removeItinerary = "#itinerary-"+eventIDremove;
+        console.log(removeItinerary)
+        $(removeItinerary).empty()
+
 
         // database.ref().on("child_added", function (childSnapshot) {
 
         //   //mad props to VIVIAN!!
         //   childSnapshot.forEach(function (child) {
-      
+
         //     var obj = child.val();
         //     // console.log(obj);
         //     // console.log(obj.title);
-      
+
         //     var fireTitle = obj.title;
         //     var fireImageURL = obj.image;
         //     var fireLink = obj.link;
         //     var fireRating = obj.rating;
-      
+
         //     var itineraryDiv = $('<div>');
-      
+
         //     var itineraryTitle = $("<div>" + fireTitle + "</div>")
         //     itineraryTitle.attr("id", "fireTitle")
         //     itineraryDiv.append(fireTitle, "<br>")
-      
+
         //     var itineraryImage = $("<img>")
         //     itineraryImage.attr("src", fireImageURL)
         //     itineraryImage.attr("alt", fireTitle)
         //     itineraryImage.addClass("itinerary-image")
         //     itineraryDiv.append(itineraryImage);
-      
+
         //     var itineraryLink = $("<a>");
         //     itineraryLink.attr("href", fireLink)
         //     itineraryLink.text("Link: " + fireTitle)
         //     itineraryDiv.append(itineraryLink, "<br>")
-      
+
         //     var itineraryRating = $("<p>");
         //     itineraryRating.text("Rated " + fireRating + " stars on Yelp!")
         //     itineraryRating.attr("data-fire-rating", fireRating)
         //     itineraryDiv.append(itineraryRating, "<br>")
-      
+
         //     $("#itinerary-display").append(itineraryDiv)
         //     console.log("result of unchecking")
 
         //   })
-      
+
         //   // Handle the errors
         // }, function (errorObject) {
         //   console.log("Errors handled: " + errorObject.code);
         // });
-      
+
         //end of owl item click "IF" statement
+
       } else {
         $(this).addClass('checked');
 
@@ -258,49 +261,55 @@ $(document).ready(function () {
 });
 
 //empty the itinerary div
-$("#itinerary-display").empty()
+// $("#itinerary-display").empty()
 
-  database.ref().on("child_added", function (childSnapshot) {
+database.ref().on("child_added", function (childSnapshot) {
 
-    //mad props to VIVIAN!!
-    childSnapshot.forEach(function (child) {
+  //mad props to VIVIAN!!
+  childSnapshot.forEach(function (child) {
 
-      var obj = child.val();
-      // console.log(obj);
-      // console.log(obj.title);
+    var obj = child.val();
+    // console.log(obj);
+    // console.log(obj.title);
 
-      var fireTitle = obj.title;
-      var fireImageURL = obj.image;
-      var fireLink = obj.link;
-      var fireRating = obj.rating;
+    var fireTitle = obj.title;
+    var fireImageURL = obj.image;
+    var fireLink = obj.link;
+    var fireRating = obj.rating;
+    var fireID = obj.eventID
+    console.log(fireID)
 
-      var itineraryDiv = $('<div>');
+    var itineraryDiv = $('<div class="itinerary-activity">');
+    var itineraryID = "itinerary-" + fireID
+    console.log (itineraryID)
+    itineraryDiv.attr("id", itineraryID)
+    console.log(itineraryDiv)
 
-      var itineraryTitle = $("<div>" + fireTitle + "</div>")
-      itineraryTitle.attr("id", "fireTitle")
-      itineraryDiv.append(fireTitle, "<br>")
+    var itineraryTitle = $("<div>" + fireTitle + "</div>")
+    itineraryTitle.attr("id", "fireTitle")
+    itineraryDiv.append(fireTitle, "<br>")
 
-      var itineraryImage = $("<img>")
-      itineraryImage.attr("src", fireImageURL)
-      itineraryImage.attr("alt", fireTitle)
-      itineraryImage.addClass("itinerary-image")
-      itineraryDiv.append(itineraryImage);
+    var itineraryImage = $("<img>")
+    itineraryImage.attr("src", fireImageURL)
+    itineraryImage.attr("alt", fireTitle)
+    itineraryImage.addClass("itinerary-image")
+    itineraryDiv.append(itineraryImage);
 
-      var itineraryLink = $("<a>");
-      itineraryLink.attr("href", fireLink)
-      itineraryLink.text("Link: " + fireTitle)
-      itineraryDiv.append(itineraryLink, "<br>")
+    var itineraryLink = $("<a>");
+    itineraryLink.attr("href", fireLink)
+    itineraryLink.text("Link: " + fireTitle)
+    itineraryDiv.append(itineraryLink, "<br>")
 
-      var itineraryRating = $("<p>");
-      itineraryRating.text("Rated " + fireRating + " stars on Yelp!")
-      itineraryRating.attr("data-fire-rating", fireRating)
-      itineraryDiv.append(itineraryRating, "<br>")
+    var itineraryRating = $("<p>");
+    itineraryRating.text("Rated " + fireRating + " stars on Yelp!")
+    itineraryRating.attr("data-fire-rating", fireRating)
+    itineraryDiv.append(itineraryRating, "<br>")
 
-      $("#itinerary-display").append(itineraryDiv)
-      console.log("global scope")
-    })
+    $("#itinerary-display").append(itineraryDiv)
+    console.log("global scope")
+  })
 
-    // Handle the errors
-  }, function (errorObject) {
-    console.log("Errors handled: " + errorObject.code);
-  });
+  // Handle the errors
+}, function (errorObject) {
+  console.log("Errors handled: " + errorObject.code);
+});
