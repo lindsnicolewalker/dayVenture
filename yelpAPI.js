@@ -180,7 +180,7 @@ $(document).ready(function () {
       if ($(this).hasClass("checked")) {
         $(this).removeClass('checked');
 
-        $("#itinerary-display").empty()
+        // $("#itinerary-display").empty()
 
         // To remove the entry for checkmark unchecked (by ZOE & Lyle)
         var query = database.ref();
@@ -275,7 +275,7 @@ $(document).ready(function () {
 
 // for (var i = 0; i < iteneraryArray.length; i++) {
 
-database.ref().on("value", function (childSnapshot) {
+database.ref().on("child_added", function (childSnapshot) {
 
 
   //mad props to VIVIAN!!
