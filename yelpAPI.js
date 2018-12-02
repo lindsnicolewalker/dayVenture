@@ -110,8 +110,8 @@ $.ajax({
 
   $("#owl-demo").owlCarousel({
     items: 3,
-    dots: false,
-    nav: true
+    dots: true,
+    nav: false
 });
 
 $(".owl-item").on("click", function(){
@@ -121,4 +121,75 @@ $(".owl-item").on("click", function(){
 });
 
 });
+
+
+
+// Lindsey's testimonials
+
+
+ 
+var name = "";
+var review = ""; 
+
+
+$(document).on("click", "#submit", function(event) {
+  event.preventDefault();
+
+  // Grabbed values from text boxes
+  name = $("#fname").val().trim();
+  review = $("#subject").val().trim();
+
+  $("#reviews-display").text(" \" " + review + " \" " + " - " + name);
+ 
+   
+}); 
+
+
+// Lindsey's FB
+
+ // Initialize Firebase
+ var config = {
+  apiKey: "AIzaSyAXIOcZoTp4y2t9tYtyiN1JA6HRZoIvT28",
+  authDomain: "dayventurebylolz.firebaseapp.com",
+  databaseURL: "https://dayventurebylolz.firebaseio.com",
+  projectId: "dayventurebylolz",
+  storageBucket: "dayventurebylolz.appspot.com",
+  messagingSenderId: "858404665634"
+};
+firebase.initializeApp(config);
+
+var database = firebase.database();
+
+var review = "DAYVENTURE IS AWESOME. FIVE STARS";
+var name = "Harry Potter";
+
+database.ref().on("value", function(snapshot){
+
+  if(snapshot.child("review").exists() && snapshot.child("name").exists()){
+
+    review = snapshot.val().review; 
+    name= snapshot.val().name; 
+ }
+
+  $("#reviews-display").text(" \" " + review + " \" " + " -" + name);
+ });
+
+
+  $(document).on("click", "#submit", function(event) {
+  // event.preventDefault();
+
+  // Grabbed values from text boxes
+  var reviewerName = $("#fname").val().trim();
+  var reviewerReview = $("#subject").val().trim();
+
+  database.ref().set({
+  name: reviewerName,
+  review: reviewerReview
+});
+   
+}); 
+
+
+
+
 
