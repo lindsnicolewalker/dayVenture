@@ -286,3 +286,74 @@ database.ref().on("child_added", function (childSnapshot) {
 }, function (errorObject) {
   console.log("Errors handled: " + errorObject.code);
 });
+
+//  var http://api.openweathermap.org/data/2.5/forecast?appid=f54f78656d096d76ff850ad75c4be18e&q=94553,us
+// apiKey = f54f78656d096d76ff850ad75c4be18e
+$(document).on("click", "#getstarted-button", function (event) {
+  event.preventDefault();
+  var zipInput = $("#zipInput").val().trim();
+  console.log(zipInput);
+  var query = "http://api.openweathermap.org/data/2.5/forecast?appid=f54f78656d096d76ff850ad75c4be18e&q=" + zipInput + ",us"
+  $.get(query)
+     .then(function (data) {
+      console.log(data)
+      var kelvin = data.list[0].main.temp;
+      var fahrenheit = Math.floor(kelvin * 9 / 5 - 459.67);
+      console.log(fahrenheit);
+      $("#weather-results").append("<h1>The weather in " + data.city.name + " is " + fahrenheit + "\u{000B0} F</h1>")
+    })
+     .catch(function (error) {
+      console.log(error);
+     })
+})
+
+
+
+// Lindsey's testimonials
+  
+var name = "";
+var review = ""; 
+ $(document).on("click", "#submit", function(event) {
+  event.preventDefault();
+   // Grabbed values from text boxes
+  name = $("#fname").val().trim();
+  review = $("#subject").val().trim();
+   $("#reviews-display").text(" \" " + review + " \" " + " - " + name);
+ 
+   
+}); 
+
+// // Lindsey's FB
+//   // Initialize Firebase
+//   var config = {
+//     apiKey: "AIzaSyAXIOcZoTp4y2t9tYtyiN1JA6HRZoIvT28",
+//     authDomain: "dayventurebylolz.firebaseapp.com",
+//     databaseURL: "https://dayventurebylolz.firebaseio.com",
+//     projectId: "dayventurebylolz",
+//     storageBucket: "dayventurebylolz.appspot.com",
+//     messagingSenderId: "858404665634"
+//   };
+//   firebase.initializeApp(config);
+//    var database = firebase.database();
+
+   var review = "DAYVENTURE IS AWESOME. FIVE STARS";
+  var name = "Harry Potter";
+   database.ref().on("value", function(snapshot){
+     if(snapshot.child("review").exists() && snapshot.child("name").exists()){
+       review = snapshot.val().review; 
+      name= snapshot.val().name; 
+   }
+     $("#reviews-display").text(" \" " + review + " \" " + " -" + name);
+   });
+     $(document).on("click", "#submit", function(event) {
+    // event.preventDefault();
+     // Grabbed values from text boxes
+    var reviewerName = $("#fname").val().trim();
+    var reviewerReview = $("#subject").val().trim();
+     database.ref().set({
+    name: reviewerName,
+    review: reviewerReview
+  });
+     
+  }); 
+  
