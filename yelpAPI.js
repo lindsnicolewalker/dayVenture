@@ -277,13 +277,10 @@ database.ref().on("child_added", function (childSnapshot) {
     var fireLink = obj.link;
     var fireRating = obj.rating;
     var fireID = obj.eventID
-    console.log(fireID)
 
     var itineraryDiv = $('<div class="itinerary-activity">');
     var itineraryID = "itinerary-" + fireID
-    console.log (itineraryID)
     itineraryDiv.attr("id", itineraryID)
-    console.log(itineraryDiv)
 
     var itineraryTitle = $("<div>" + fireTitle + "</div>")
     itineraryTitle.attr("id", "fireTitle")
@@ -306,7 +303,6 @@ database.ref().on("child_added", function (childSnapshot) {
     itineraryDiv.append(itineraryRating, "<br>")
 
     $("#itinerary-display").append(itineraryDiv)
-    console.log("global scope")
   })
 
   // Handle the errors
