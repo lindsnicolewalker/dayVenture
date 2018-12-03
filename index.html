@@ -43,156 +43,128 @@
 </head>
 
 <body>
-
-    <!-- video -->
+    <!-- video landing page 1 -->
+    <!-- video container -->
     <div class="vid-container">
         <video style="margin-bottom: 100px;" autoplay muted loop id="myVideo">
             <source src="assets/images/video.mp4" type="video/mp4" width="100%">
             Your browser does not support HTML5 video.
         </video>
 
+        <!-- logo https://bit.ly/2Q2N1Rb https://www.cafeunion.com/uploads/coffeestrength/1_ph_light_coffee.png    -->
+
+        <!-- hero text -->
+        <!-- navbar -->
         <div class="topnav ">
+            <a class="lindsnav" href="#defaultCarousel">Top Rated</a>
+            <a class="lindsnav" href="#itinerary">Itinerary</a>
+            <a class="lindsnav" href="#testimonials">Testimonials</a>
+        </div>
 
-                <a class="lindsnav" href="#getStarted">Get Started</a>
-                <a class="lindsnav" href="#defaultCarousel">Top Rated</a>
-                <!-- <a class="lindsnav" href="#itinerary">Sample Itinerary</a>
-                <a class="lindsnav" href="#testimonials">Testimonials</a> -->
+        <!-- <img class="logo" src="https://images.vexels.com/media/users/3/141916/isolated/preview/dcd10d362e49a3c161379047a940ba7d-location-pin-stroke-icon-by-vexels.png"> -->
+
+        <div class="hero-text">
+            <h1>
+                D A Y V E N T U R E
+            </h1>
+
+            <!-- get started button with smooth scroll href feature -->
+            <div class="topnav ">
+                <a style="display: block" id="hero-button" class="lindsnav" href="#getStarted">Get Started</a>
             </div>
-        <!-- logo https://bit.ly/2Q2N1Rb  https://images.vexels.com/media/users/3/141916/isolated/preview/dcd10d362e49a3c161379047a940ba7d-location-pin-stroke-icon-by-vexels.png   -->
-        <img class="logo" src="https://www.cafeunion.com/uploads/coffeestrength/1_ph_light_coffee.png">
+        </div>
     </div>
-
-    <!-- hero text -->
-    <div class="hero-text">
-        <h1>
-            <hr> &middot; D A Y V E N T U R E &middot; <hr>
-            
-        </h1>
-        <!-- <p><h4>Be one of the first to let dayventure plan your      day trip! experience the top rated events in your area, without all the decision fatigue. Dayventure does the research for you. Just give us your
-            location so we can find an awesome adventure and then well set you up with your itinerary and navigation!! </h4>
-        </p> -->
-    </div>
-
-    <!-- nav bar -->
-    <div class="topnav ">
-<!-- 
-        <a class="lindsnav" href="#getStarted">Get Started</a>
-        <a class="lindsnav" href="#defaultCarousel">Top Rated</a> -->
-        <a class="lindsnav" href="#itinerary">Sample Itinerary</a>
-        <a class="lindsnav" href="#testimonials">Testimonials</a>
-    </div>
-    <!-- marker for nav bar "get started" button smooth scroll feature -->
+    
+    <!-- html marker for nav bar "get started" button smooth scroll feature -->
     <div id="getStarted"></div>
 
     <!-- first parallax scrolly section -->
-    <div style="position:relative;">
-        <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 50px;text-align: justify; ">
-            <p>
-                <h1>Get Started!</h1>
-                <h4>First, tell us where you are...</h4>
-            </p>
-
+    <div class="foreground-section" style="position:relative;">
+        <div style="color:#282E34;background-color:#ddd;text-align:center;padding:50px 50px;text-align: justify; ">
+            <h2> First, tell us where you want to go...</h2>
+            
             <!-- zip code input field -->
             <div class="zipcode-container">
                 <form class="display-flex lindsform">
-                    <input type="text" placeholder="zipcode" name="search">
-                    <button id="getstarted-button">Submit</button>
-
-                    <!-- on submit click the results carousel populates with location based results -->
-
+                    <input id="zipInput" type="text" placeholder="zipcode" name="search">
+                    <button style="border-style: solid;
+                    border-radius:50px; 
+                    border-color:black;border-width:1px;" id="getstarted-button">Submit</button>
                 </form>
-                <!-- dropdow to search by activity/ filter:highest rated/range/price high to low/price low to high/  -->
             </div>
         </div>
+    </div>
+      
+    <!-- first background image of parallax -->
+    <div class="image0"></div>
 
-        <!-- first background image of parallax -->
-        <div class="image0">
-                <div class="caption" id="reviews-display">reviews here</div>
-
-           </div>
-
-        <!-- marker for nav bar "top rated" button smooth scroll feature -->
-        <!-- defaultpopulate carousel with top rated cities, top rated events, maybe make a new parallax section for it -->
-        <div id="defaultCarousel"></div>
+        <!-- foreground caption over image0 -->
+        <div id = "weather-results"class="caption">
+             <h1><div ></div></h1>
+        </div>
 
         <!-- second parallax scrolly section -->
         <div style="position:relative;">
-            <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 50px;text-align: justify;">
-                <p>
-                    <h1>Select an adventure from the options we found in your area! </h1>
-                    <h4>or enter your zipcode to see results in a new location...</h4>
-                </p>
-                <!-- on "go" button click populate itinerary and move page down to iterary div using html smooth scrolling -->
-
-                <!-- carousel -->
-                <!-- <div id="yelp-results"></div>
-                <div id="eventful-results"></div>
-                <div id ="carousel-container"></div>
-               -->
+            <div style="color:#282E34;background-color:white;text-align:center;padding:50px 50px;text-align: justify;">
+                <h1> Next, select an event... </h1>
+                <h2>Enter a zipcode to see results in a new location</h2>
+               
+                <!-- event results carousel -->
                 <div id="carousel-container"></div>
 
             </div>
         </div>
 
-        <!-- second background image of parallax: people having coffee -->
-        <div class="image1">
-            <div class="caption">
-            </div>
-        </div>
+    <!-- second background image of parallax-->
+    <div class="image1"></div>
 
-        <!-- marker for nav bar "itinerary" button smooth scroll feature -->
-        <div id="itinerary"></div>
+        <!-- foreground caption over image1 -->
+        <div class="caption"><h1>Voila, here's your itinerary!</h1></div>
 
-        <!-- third parallax scrolly section -->
-        <div style="position:relative;">
-            <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 50px;text-align: justify;">
-                <p>
-                    <h1>Here's your itinerary!</h1>
-                    <h4>We've included weather and driving directions to make your plan easier.</h4>
-                </p>
-                <!-- includes a sample itinerary with navigation and weather and button that takes you down to navigation and displays navigation for the day based on selected adventure -->
+    <!-- html marker for nav bar "itinerary" button smooth scroll feature -->
+    <div id="itinerary"></div>
 
-                
+    <!-- third parallax scrolly section -->
+    <div class="foreground-section"style="position:relative;">
+            <!-- includes a sample itinerary with navigation and weather and button that takes you down to navigation and displays navigation for the day based on selected adventure -->
+      
+        <div style="color:#282E34;background-color:#ddd;text-align:center;padding:50px 50px;text-align: justify;">
 
             </div>
-        </div>
+    </div>
 
-        <!-- third parallax background image: restaurant" -->
-        <div class="image2">
-            <div class="caption">
+    <!-- third parallax background image: restaurant" -->
+    <div class="image2"></div>
+    
+        <!-- foreground caption for image2 -->
+        <div class="caption" id="reviews-display"></div>
+
+    <!-- html marker for nav bar "testimonials" button/ could replace with navigation -->
+    <div id="testimonials"></div>
+
+    <!-- fourth parallax scrolly section -->
+    <div class="foreground-section" style="position:relative;">
+        <div style="color:#282E34;background-color:#ddd;text-align:center;padding:50px 50px;text-align: justify;">
+            <h2>Write a Review</h2>
+            <h4>...and see it displayed on the page</h4>
+
+            <!-- review submit form -->
+            <div class="container">
+                <form>
+                    <label for="fname">First Name</label>
+                    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+                    <label for="subject">Leave a Review</label>
+                    <textarea id="subject" name="subject" placeholder="Write something nice.." style="height:200px"></textarea>
+
+                    <button style="border-style: solid;
+                    border-width:1px;
+                    border-color:black;
+                    border-radius:50px; "
+                        id="submit">submit</button>
+                </form>
             </div>
         </div>
-
-        <!-- marker for nav bar "testimonials" button/ could replace with navigation -->
-        <div id="testimonials"></div>
-
-        <!-- fourth parallax scrolly section -->
-        <div style="position:relative;">
-            <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 50px;text-align: justify;">
-                <p>
-                    <h1>Write a Review</h1>
-                    <h4>See it displayed at the top of the page</h4>
-
-
-                    <!-- review submit form -->
-                    <!-- append results to page -->
-                    <div class="container">
-                        <form>
-                            <label for="fname">First Name</label>
-                            <input type="text" id="fname" name="firstname" placeholder="Your name..">
-                            <label for="subject">Leave a Review</label>
-                            <textarea id="subject" name="subject" placeholder="Write something nice.." style="height:200px"></textarea>
-
-                            <button id="submit" >submit</button>
-                        </form>
-                    </div>
-                </p>
-            </div>
-        </div>
-
-        <!-- fourth parallax background image: concert -->
-        <!-- <div class="image3">
-        </div> -->
+    </div>
 
 </body>
 
