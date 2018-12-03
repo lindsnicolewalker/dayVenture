@@ -49,7 +49,7 @@ $(document).ready(function () {
       var yelpKey = "93-sQptypfHJJ-zn2q1fOKSujEsPzhm_gVzq-5g7q_P1G4TIsuM7G126ydE37pmuFcd4o2t-_a8pkiBHZV6Rt1eRkcfzMmOJ5OIFZwsFPvrkjFHdcNEYo1_JBiMAXHYx";
 
 
-      //grab the city we selected earlier.
+      //TODO, populated this value from the users location. for now, let's use San Francisco"
       var where = activeCity;
       $("#city-selected-display").text(activeCity)
       
