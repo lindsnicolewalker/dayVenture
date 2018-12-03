@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-
+    <title>DayVenture</title>
+    
     <!-- Google Fonts  -->
     <link href="https://fonts.googleapis.com/css?family=Text+Me+One" rel="stylesheet">
 
@@ -32,14 +32,22 @@
         crossorigin="anonymous">
 
     <!-- Important Owl stylesheets -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"/>
 
     <!-- Link CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
 
+    <!-- FireBase!! -->
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+    
     <!-- <script src="eeventfulAPI.js"></script> -->
+    
     <script src="yelpAPI.js"></script>
+
+    <!-- itinerary population -->
+    <!-- <script src="itinerary.js"></script> -->
 </head>
 
 <body>
@@ -125,12 +133,20 @@
     <div id="itinerary"></div>
 
     <!-- third parallax scrolly section -->
-    <div class="foreground-section"style="position:relative;">
-            <!-- includes a sample itinerary with navigation and weather and button that takes you down to navigation and displays navigation for the day based on selected adventure -->
-      
-        <div style="color:#282E34;background-color:#ddd;text-align:center;padding:50px 50px;text-align: justify;">
+    <div style="position:relative;">
+        <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
+            <p>
+                <h1>Click Here for your recommended Dayventure!</h1>
 
-            </div>
+                <!-- <button id="itinerary-button">Update My Itinerary Button</button> -->
+                
+                <h6>click nav button for driving directions.</h6>
+            </p>
+
+            <div id="itinerary-display">Insert Itinerary HERE</div>
+
+            <!-- includes a sample itinerary and button that takes you down to navigation and displays navigation for the day based on selected adventure -->
+        </div>
     </div>
 
     <!-- third parallax background image: restaurant" -->
@@ -165,6 +181,10 @@
             </div>
         </div>
     </div>
+
+
+   
+    
 
 </body>
 
