@@ -18,7 +18,6 @@ var database = firebase.database();
 
 // API Key
 // 93-sQptypfHJJ-zn2q1fOKSujEsPzhm_gVzq-5g7q_P1G4TIsuM7G126ydE37pmuFcd4o2t-_a8pkiBHZV6Rt1eRkcfzMmOJ5OIFZwsFPvrkjFHdcNEYo1_JBiMAXHYx
-<<<<<<< HEAD
 $(document).ready(function () {
 
   // Some APIs will give us a cross-origin (CORS) error. This small function is a fix for that error. You can also check out the chrome extenstion (https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en).
@@ -56,7 +55,6 @@ $(document).ready(function () {
   //     location: where,
   //     term: query,
   //   }
-=======
 
 $(document).ready(function () {
 
@@ -99,11 +97,9 @@ $(document).ready(function () {
 
     //make the owl carousel
     var carousel = $('<div id="owl-demo" class="owl-carousel owl-theme">');
->>>>>>> 334ec4caffca28e710a77a7fbf9b15a4c3a53823
 
     for (var i = 0; i < response.businesses.length; i++) {
 
-<<<<<<< HEAD
   $.ajax({
     url: yelpQueryURL,
     headers: {
@@ -120,7 +116,6 @@ $(document).ready(function () {
     var carousel = $('<div id="owl-demo" class="owl-carousel owl-theme">');
 
     for (var i = 0; i < response.businesses.length; i++) {
-=======
       //Event ID to track events internally
       //Events from this API will be a number starting at 1000. Another API could be 2000+, another 3000+ and so on.
       var eventID = (10000 + parseInt([i]))
@@ -133,12 +128,10 @@ $(document).ready(function () {
 
       //event URL
       var link = response.businesses[i].url
->>>>>>> 334ec4caffca28e710a77a7fbf9b15a4c3a53823
 
       //    rating;
       var rating = response.businesses[i].rating
 
-<<<<<<< HEAD
       //Event Title
       var title = response.businesses[i].name;
       //activity type
@@ -250,7 +243,7 @@ database.ref().on("child_added", function (snapshot) {
 var reviewCarousel = $('<div id="review-carousel">');
 // $("#reviews-display").append("<div <p>" + " \" " + review + " \" " + " - " + name + "</p> </div>");
 
-$("#reviews-display").append( " \" " + review + " \" " + " - " + name );
+$("#reviews-display").text( " \" " + review + " \" " + " - " + name );
 
 
 
@@ -299,7 +292,6 @@ $(document).on("click", "#getstarted-button", function (event) {
     })
 })
 
-=======
       //cost
 
       // TODO
@@ -534,4 +526,3 @@ database.ref().on("child_added", function (childSnapshot) {
 }, function (errorObject) {
   console.log("Errors handled: " + errorObject.code);
 });
->>>>>>> 334ec4caffca28e710a77a7fbf9b15a4c3a53823
