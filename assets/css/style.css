@@ -260,6 +260,7 @@ display: none;
   float:right; 
   transform: translateY(-250px);
   position:relative;
+  right: -44px;
 
 }
 
@@ -267,6 +268,7 @@ display: none;
   float:left; 
   transform: translateY(-250px);
   position:relative;
+  left: -44px;
 }
 
 #owl-demo .item {
@@ -371,6 +373,15 @@ max-width:300px;
   border-radius: 30px;
 }
 
+.itinerary-image {
+  max-width: 500px;
+  width: 100%;
+}
+
+.itinerary-activity > a {
+  display: block;
+}
+
 /* ZIPCODE INPUT FIELD */
 
 .zipcode-container {
@@ -433,7 +444,6 @@ label{
 
 }
 
-
 /* REVIEWS DISPLAY */
 /* #reviews-display{
   font-size: 30px;
@@ -467,4 +477,25 @@ label{
     .image0, .image1, .image2, .image3 {
         background-attachment: scroll;
     }
+}
+
+@media only screen and (max-width: 769px) {
+  .hero-text {
+    width: 90%;
+  }
+  .hero-text h1 {
+    font-size: 30px;
+  }
+  .caption {
+    padding: 20px;
+  }
+  .caption h1 {
+    font-size: 16px;
+  }
+  #city-selected-display {
+    margin-bottom: 80px;
+  }
+  .itinerary-heading {
+    font-size: 20px;
+  }
 }
