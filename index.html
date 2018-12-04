@@ -10,9 +10,6 @@
     <!-- Google Fonts  -->
     <link href="https://fonts.googleapis.com/css?family=Text+Me+One" rel="stylesheet">
 
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase.js"></script>
-
     <!-- Link AJAX and JQUERY-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -46,15 +43,13 @@
     
     <script src="yelpAPI.js"></script>
 
-    <!-- itinerary population -->
-    <!-- <script src="itinerary.js"></script> -->
 </head>
 
 <body>
     <!-- video landing page 1 -->
     <!-- video container -->
     <div class="vid-container">
-        <video style="margin-bottom: 100px;" autoplay muted loop id="myVideo">
+        <video autoplay muted loop id="myVideo">
             <source src="assets/images/video.mp4" type="video/mp4" width="100%">
             Your browser does not support HTML5 video.
         </video>
@@ -78,7 +73,7 @@
 
             <!-- get started button with smooth scroll href feature -->
             <div class="topnav ">
-                <a style="display: block" id="hero-button" class="lindsnav" href="#getStarted">Get Started</a>
+                <a id="hero-button" class="lindsnav" href="#getStarted">Get Started</a>
             </div>
         </div>
     </div>
@@ -87,39 +82,44 @@
     <div id="getStarted"></div>
 
     <!-- first parallax scrolly section -->
-    <div class="foreground-section" style="position:relative;">
-        <div style="color:#282E34;background-color:#ddd;text-align:center;padding:50px 50px;text-align: justify; ">
-            <h2> First, tell us where you want to go...</h2>
-            
+    <div>
+        <div  class="foreground-section">
+            <!-- <h2> First, tell us where you want to go...</h2> -->
+            <h3>Your Target City Is</h3>
+            <h1 id="city-selected-display"> TARGET CITY</h1>
+            <div id = "weather-results" ></div>
+            <h3>(Refresh the page for a new city)</h3>
+        </div>
             <!-- zip code input field -->
-            <div class="zipcode-container">
-                <form class="display-flex lindsform">
+            <!-- <div class="zipcode-container"> -->
+                <!-- <form class="display-flex lindsform">
                     <input id="zipInput" type="text" placeholder="zipcode" name="search">
                     <button style="border-style: solid;
                     border-radius:50px; 
-                    border-color:white;border-width:1px;" id="getstarted-button">Submit</button>
-                </form>
-            </div>
+                    border-color:black;border-width:1px;" id="getstarted-button">Submit</button>
+                </form> -->
+            <!-- </div> -->
         </div>
     </div>
-      
+    
     <!-- first background image of parallax -->
     <div class="image0"></div>
 
         <!-- foreground caption over image0 -->
-      
-             <h1><div id = "weather-results"class="caption"></h1>
-        </div>
+        
+        <div id="defaultCarousel"></div>
 
+        <div class="caption"></h1>
+ Next, select an event...</h1> </div>
         <!-- second parallax scrolly section -->
-        <div style="position:relative;">
-            <div style="color:#282E34;background-color:white;text-align:center;padding:50px 50px;text-align: justify;">
-                <h1> Next, select an event... </h1>
-                <h2>Enter a zipcode to see results in a new location</h2>
+        <div>
+            <div class = "foreground-section">
+                
+                <!-- <h2>Enter a zipcode to see results in a new location</h2> -->
                
                 <!-- event results carousel -->
                 <div id="carousel-container"></div>
-
+                
             </div>
         </div>
 
@@ -127,42 +127,41 @@
     <div class="image1"></div>
 
         <!-- foreground caption over image1 -->
-        <div class="caption"><h1>Here's your itinerary!</h1></div>
+        <div class="caption"><h1>ahh, Finally! Your itinerary is ready!</h1></div>
 
     <!-- html marker for nav bar "itinerary" button smooth scroll feature -->
     <div id="itinerary"></div>
 
     <!-- third parallax scrolly section -->
-    <div style="position:relative;">
-        <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
-            <p>
-                
+    <div >
+        <div class="foreground-section">
+           
+                <h1 class="itinerary-heading">Your Itinerary...</h1>
 
                 <!-- <button id="itinerary-button">Update My Itinerary Button</button> -->
                 
-            </p>
+                <!-- <h6>click nav button for driving directions.</h6> -->
+          
 
-            <!-- <div id="itinerary-display">Insert Itinerary HERE</div> -->
-            <div id="carousel-container2"></div>
+            <div id="itinerary-display">Insert Itinerary HERE</div>
 
-            <!-- includes a sample itinerary and button that takes you down to navigation and displays navigation for the day based on selected adventure -->
-        </div>
+      
     </div>
 
     <!-- third parallax background image: restaurant" -->
     <div class="image2"></div>
     
         <!-- foreground caption for image2 -->
-        <div class="caption" id="reviews-display"><h1></h1></div>
+        <div class="caption" id="reviews-display"></div>
 
     <!-- html marker for nav bar "testimonials" button/ could replace with navigation -->
     <div id="testimonials"></div>
 
     <!-- fourth parallax scrolly section -->
-    <div class="foreground-section" style="position:relative;">
-        <div style="color:#282E34;background-color:#ddd;text-align:center;padding:50px 50px;text-align: justify;">
-            <h2>Write a Review</h2>
-            <h4>...and see it displayed on the page</h4>
+    <div>
+        <div class="foreground-section">
+            <h1>Write a Review</h1>
+            <h3>...and see it displayed on the page</h3>
 
             <!-- review submit form -->
             <div class="container">
@@ -172,11 +171,7 @@
                     <label for="subject">Leave a Review</label>
                     <textarea id="subject" name="subject" placeholder="Write something nice.." style="height:200px"></textarea>
 
-                    <button style="border-style: solid;
-                    border-width:1px;
-                    border-color:black;
-                    border-radius:50px; "
-                        id="submit">submit</button>
+                    <button id="submit">submit</button>
                 </form>
             </div>
         </div>
