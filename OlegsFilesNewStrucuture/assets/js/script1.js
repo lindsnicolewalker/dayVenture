@@ -35,6 +35,7 @@ jQuery.getJSON(
         console.log("below print out of uniqueCitites function ");
         console.log(uniqueCities);
         getRandomCity(uniqueCities);
+        drawZipApiTable();
     }
 
 )

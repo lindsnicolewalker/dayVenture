@@ -22,37 +22,65 @@ var database = firebase.database();
 $(document).ready(function () {
 
 
+  // Some APIs will give us a cross-origin (CORS) error. This small function is a fix for that error. 
+  jQuery.ajaxPrefilter(function (options) {
+    if (options.crossDomain && jQuery.support.cors) {
+      options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
+    }
+  });
 
-  var sGeobytesLocationCode = "";
-  var nearbyGeobytesCities = [];
+var activeCity
 
   jQuery.getJSON(
-    "http://getnearbycities.geobytes.com/GetNearbyCities?callback=?&radius=100&limit=25&locationcode=" + sGeobytesLocationCode,
-    function (data) {
-      for (var i = 0; i < data.length; i++) {
-        nearbyGeobytesCities.push(data[i][1])
+    "https://www.zipcodeapi.com/rest/xurGnDV0QceRvNrjKVIyqzPBYRvMVasNhgr9H5j7lAkKLIl8ys7TsN19XoSD13ID/radius.json/94122/65/mile",
+    function (zipData) {
 
+      var zipDataArray = zipData.zip_codes;
+      var cityList = convertCityArr(zipDataArray); //originally this line was : var cityList = convertCityArr(response)
+
+      var unique = function (value, index, self) {
+        return self.indexOf(value) === index;
       }
-      activeCity = nearbyGeobytesCities[Math.floor
-        (Math.random() * nearbyGeobytesCities.length)]
-      console.log(activeCity)
 
+      var uniqueCities = cityList.filter(unique);
+      getRandomCity(uniqueCities);
 
-      // Some APIs will give us a cross-origin (CORS) error. This small function is a fix for that error. 
-      jQuery.ajaxPrefilter(function (options) {
-        if (options.crossDomain && jQuery.support.cors) {
-          options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
+      function convertCityArr(array) {
+        var cities = [];
+        for (var i = 0; i < array.length; i++) {
+          var cityName = array[i].city;
+          cities.push(cityName)
         }
-      });
+        return cities;
+      }
+
+      function getRandomCity(uniqueCities) {
+        var activeCityIndex = uniqueCities[Math.floor(Math.random() * uniqueCities.length)];
+       activeCity = activeCityIndex;
+      }
+      
+      //Display the city selected on the page
+      $("#city-selected-display").text(activeCity)
+
+      var query = "http://api.openweathermap.org/data/2.5/forecast?appid=f54f78656d096d76ff850ad75c4be18e&q=" + activeCity + ",us"
+      $.get(query)
+        .then(function (data) {
+          var kelvin = data.list[0].main.temp;
+          var fahrenheit = Math.floor(kelvin * 9 / 5 - 459.67);
+          $("#weather-results").append("<h1>The weather in " + data.city.name + " is " + fahrenheit + "\u{000B0} F</h1>")
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+
 
       //our key for yelp API
       var yelpKey = "93-sQptypfHJJ-zn2q1fOKSujEsPzhm_gVzq-5g7q_P1G4TIsuM7G126ydE37pmuFcd4o2t-_a8pkiBHZV6Rt1eRkcfzMmOJ5OIFZwsFPvrkjFHdcNEYo1_JBiMAXHYx";
 
-
-      //TODO, populated this value from the users location. for now, let's use San Francisco"
+        
       var where = activeCity;
-      $("#city-selected-display").text(activeCity)
-      
+    
+
 
       //search terms
       var query = "events"
@@ -231,7 +259,7 @@ $(document).ready(function () {
         //end of ajax response
       });
 
-      //end of geobytes
+      //end of zipcodeAPI
     });
 
   //end of document ready
@@ -287,41 +315,21 @@ database.ref().on("child_added", function (childSnapshot) {
   console.log("Errors handled: " + errorObject.code);
 });
 
-//  var http://api.openweathermap.org/data/2.5/forecast?appid=f54f78656d096d76ff850ad75c4be18e&q=94553,us
-// apiKey = f54f78656d096d76ff850ad75c4be18e
-$(document).on("click", "#getstarted-button", function (event) {
-  event.preventDefault();
-  var zipInput = $("#zipInput").val().trim();
-  console.log(zipInput);
-  var query = "http://api.openweathermap.org/data/2.5/forecast?appid=f54f78656d096d76ff850ad75c4be18e&q=" + zipInput + ",us"
-  $.get(query)
-     .then(function (data) {
-      console.log(data)
-      var kelvin = data.list[0].main.temp;
-      var fahrenheit = Math.floor(kelvin * 9 / 5 - 459.67);
-      console.log(fahrenheit);
-      $("#weather-results").append("<h1>The weather in " + data.city.name + " is " + fahrenheit + "\u{000B0} F</h1>")
-    })
-     .catch(function (error) {
-      console.log(error);
-     })
-})
-
 
 
 // Lindsey's testimonials
-  
+
 var name = "";
-var review = ""; 
- $(document).on("click", "#submit", function(event) {
+var review = "";
+$(document).on("click", "#submit", function (event) {
   event.preventDefault();
-   // Grabbed values from text boxes
+  // Grabbed values from text boxes
   name = $("#fname").val().trim();
   review = $("#subject").val().trim();
-   $("#reviews-display").text(" \" " + review + " \" " + " - " + name);
- 
-   
-}); 
+  $("#reviews-display").text(" \" " + review + " \" " + " - " + name);
+
+
+});
 
 // // Lindsey's FB
 //   // Initialize Firebase
@@ -335,25 +343,23 @@ var review = "";
 //   };
 //   firebase.initializeApp(config);
 //    var database = firebase.database();
-
-   var review = "DAYVENTURE IS AWESOME. FIVE STARS";
-  var name = "Harry Potter";
-   database.ref().on("value", function(snapshot){
-     if(snapshot.child("review").exists() && snapshot.child("name").exists()){
-       review = snapshot.val().review; 
-      name= snapshot.val().name; 
-   }
-     $("#reviews-display").text(" \" " + review + " \" " + " -" + name);
-   });
-     $(document).on("click", "#submit", function(event) {
-    // event.preventDefault();
-     // Grabbed values from text boxes
-    var reviewerName = $("#fname").val().trim();
-    var reviewerReview = $("#subject").val().trim();
-     database.ref().set({
+var review = "DAYVENTURE IS AWESOME. FIVE STARS";
+var name = "Harry Potter";
+database.ref().on("value", function (snapshot) {
+  if (snapshot.child("review").exists() && snapshot.child("name").exists()) {
+    review = snapshot.val().review;
+    name = snapshot.val().name;
+  }
+  $("#reviews-display").text(" \" " + review + " \" " + " -" + name);
+});
+$(document).on("click", "#submit", function (event) {
+  // event.preventDefault();
+  // Grabbed values from text boxes
+  var reviewerName = $("#fname").val().trim();
+  var reviewerReview = $("#subject").val().trim();
+  database.ref().set({
     name: reviewerName,
     review: reviewerReview
   });
-     
-  }); 
-  
+
+});
