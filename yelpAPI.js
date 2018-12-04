@@ -178,9 +178,24 @@ var activeCity
         $("#carousel-container").html(carousel);
 
         $("#owl-demo").owlCarousel({
-          items: 3,
-          dots: false,
-          nav: true
+          responsiveClass:true,
+          responsive:{
+              0:{
+                  items:1,
+                  nav:true,
+                  dots: false
+              },
+              600:{
+                  items:3,
+                  nav:true,
+                  dots: false
+              },
+              1000:{
+                  items:3,
+                  nav:true,
+                  dots: false
+              }
+          }
         });
 
         // on click of event, display that event has been selected and grab it's data
