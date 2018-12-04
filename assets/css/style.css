@@ -371,6 +371,15 @@ max-width:300px;
   border-radius: 30px;
 }
 
+.itinerary-image {
+  max-width: 500px;
+  width: 100%;
+}
+
+.itinerary-activity > a {
+  display: block;
+}
+
 /* ZIPCODE INPUT FIELD */
 
 .zipcode-container {

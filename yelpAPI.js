@@ -300,7 +300,7 @@ database.ref().on("child_added", function (childSnapshot) {
     var itineraryLink = $("<a>");
     itineraryLink.attr("href", fireLink)
     itineraryLink.text("Link: " + fireTitle)
-    itineraryDiv.append(itineraryLink, "<br>")
+    itineraryDiv.append(itineraryLink)
 
     var itineraryRating = $("<p>");
     itineraryRating.text("Rated " + fireRating + " stars on Yelp!")
