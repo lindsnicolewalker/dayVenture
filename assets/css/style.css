@@ -148,7 +148,7 @@ video{
   animation: fadeIn 3s ease-out;  
   /* filter: brightness(0) invert(1); */
   /* text-align:center; */
-  display: inline; 
+  display: inline-block; 
   font-size: 50px;
 }
 
