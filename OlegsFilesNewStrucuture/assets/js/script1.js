@@ -19,11 +19,15 @@ jQuery.ajaxPrefilter(function (options) {
     }
 });
 
+
+
+
+
 jQuery.getJSON(
     "https://www.zipcodeapi.com/rest/xurGnDV0QceRvNrjKVIyqzPBYRvMVasNhgr9H5j7lAkKLIl8ys7TsN19XoSD13ID/radius.json/94122/65/mile",
     function (zipData) {
 
-        console.log("if this is printed drawZipApiTable should have ran");
+        // console.log("if this is printed drawZipApiTable should have ran");
 
         var zipDataArray = zipData.zip_codes;
         console.log("below is zipDataArray newly made var ");
@@ -35,6 +39,16 @@ jQuery.getJSON(
         console.log("below print out of uniqueCitites function ");
         console.log(uniqueCities);
         getRandomCity(uniqueCities);
+        selectedCity = getRandomCity;
+        console.log("selected city ran and returned   ");
+        console.log(selectedCity);
+
+
+
+        ///*** experiment to move maping into this file
+
+        /// *//end of experiment
+
     }
 
 )
@@ -99,6 +113,8 @@ function getRandomCity(uniqueCities) {
     return selectedCity;
 }
 
+
+
 function drawZipApiRow(zipRowData) {
     var zipRow = $("<tr />");
     zipRow.append($("<td>" + zipRowData.city + "</td>"));
@@ -109,7 +125,7 @@ function drawUniqueZipApiRow(zipRowData) {
     var zipRow = $("<tr />");
 
     return zipRow.append($("<td>" + zipRowData + "</td>"));
-    
+
 
 }
 
@@ -118,9 +134,11 @@ function drawUniqueZipApiTable(uniqueCities) {
     console.log("now inside drawUniqueZipApiTable");
     $("#uniqueZipApiCities").html(rowFromZipApi);
     for (var i = 0; i < uniqueCities.length; i++) {
-        var line=drawUniqueZipApiRow(uniqueCities[i]);
-        console.log("current uniqueCities element is");
-        console.log(uniqueCities[i]);
+        var line = drawUniqueZipApiRow(uniqueCities[i]);
+        // console.log("current uniqueCities element is");
+        // console.log(uniqueCities[i]);
         $("#uniqueZipApiCities").append(line);
     }
 }
+
+
