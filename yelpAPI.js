@@ -189,7 +189,7 @@ $(document).ready(function () {
 
   });
 
-});
+// });
 
 
 
@@ -292,7 +292,7 @@ $(document).on("click", "#getstarted-button", function (event) {
     })
 })
 
-      //cost
+      //owl carousel
 
       // TODO
       // address - this response is an array, where each element is a 'line' of an address (usually). Let's leave it for now, but later we will need to interpret it. possibly use a for loop to store it on the data div?
