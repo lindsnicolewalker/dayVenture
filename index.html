@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DayVenture</title>
+    
+    <!-- Google Fonts  -->
+    <link href="https://fonts.googleapis.com/css?family=Text+Me+One" rel="stylesheet">
+
+    <!-- Link AJAX and JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+    <!-- Owl Carousel 2 Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+
+    <!-- Important Owl stylesheets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"/>
+
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- FireBase!! -->
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+    
+    <!-- <script src="eeventfulAPI.js"></script> -->
+    
+    <script src="yelpAPI.js"></script>
+
+</head>
+
+<body>
+    <!-- video landing page 1 -->
+    <!-- video container -->
+    <div class="vid-container">
+        <video autoplay muted loop id="myVideo">
+            <source src="assets/images/video.mp4" type="video/mp4" width="100%">
+            Your browser does not support HTML5 video.
+        </video>
+
+        <!-- logo https://bit.ly/2Q2N1Rb https://www.cafeunion.com/uploads/coffeestrength/1_ph_light_coffee.png    -->
+
+        <!-- hero text -->
+        <!-- navbar -->
+        <div class="topnav ">
+            <a class="lindsnav" href="#defaultCarousel">Top Rated</a>
+            <a class="lindsnav" href="#itinerary">Itinerary</a>
+            <a class="lindsnav" href="#testimonials">Testimonials</a>
+        </div>
+
+        <!-- <img class="logo" src="https://images.vexels.com/media/users/3/141916/isolated/preview/dcd10d362e49a3c161379047a940ba7d-location-pin-stroke-icon-by-vexels.png"> -->
+
+        <div class="hero-text">
+            <h1>
+                D A Y V E N T U R E
+            </h1>
+
+            <!-- get started button with smooth scroll href feature -->
+            <div class="topnav ">
+                <a id="hero-button" class="lindsnav" href="#getStarted">Get Started</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- html marker for nav bar "get started" button smooth scroll feature -->
+    <div id="getStarted"></div>
+
+    <!-- first parallax scrolly section -->
+
+    <div>
+        <div  class="foreground-section">
+            <!-- <h2> First, tell us where you want to go...</h2> -->
+            <h3>Your Target City Is</h3>
+            <h1 id="city-selected-display"> TARGET CITY</h1>
+            <div id = "weather-results" ></div>
+            <h3>(Refresh the page for a new city)</h3>
+
+        </div>
+            <!-- zip code input field -->
+            <!-- <div class="zipcode-container"> -->
+                <!-- <form class="display-flex lindsform">
+                    <input id="zipInput" type="text" placeholder="zipcode" name="search">
+                    <button style="border-style: solid;
+                    border-radius:50px; 
+                    border-color:black;border-width:1px;" id="getstarted-button">Submit</button>
+                </form> -->
+            <!-- </div> -->
+        </div>
+    </div>
+
+    <!-- first background image of parallax -->
+    <div class="image0"></div>
+
+        <!-- foreground caption over image0 -->
+        
+        <div id="defaultCarousel"></div>
+
+        <div class="caption"></h1>
+ Next, select an event...</h1> </div>
+        <!-- second parallax scrolly section -->
+        <div>
+            <div class = "foreground-section">
+                
+                <!-- <h2>Enter a zipcode to see results in a new location</h2> -->
+               
+                <!-- event results carousel -->
+                <div id="carousel-container"></div>
+
+            </div>
+        </div>
+
+    <!-- second background image of parallax-->
+    <div class="image1"></div>
+
+        <!-- foreground caption over image1 -->
+        <div class="caption"><h1>ahh, Finally! Your itinerary is ready!</h1></div>
+
+    <!-- html marker for nav bar "itinerary" button smooth scroll feature -->
+    <div id="itinerary"></div>
+
+    <!-- third parallax scrolly section -->
+
+    <div >
+        <div class="foreground-section">
+           
+                <h1 class="itinerary-heading">Your Itinerary...</h1>
+
+                <iframe class="current-location" id="map" width="450" height="250" frameborder="0" style="border:0" allowfullscreen>
+                </iframe>
+                </div>
+                <!-- <button id="itinerary-button">Update My Itinerary Button</button> -->
+                
+                <!-- <h6>click nav button for driving directions.</h6> -->
+          
+
+            <div id="itinerary-display">Insert Itinerary HERE</div>
+
+      
+    </div>
+
+    <!-- third parallax background image: restaurant" -->
+    <div class="image2"></div>
+    
+        <!-- foreground caption for image2 -->
+        <div class="caption" id="reviews-display"></div>
+
+    <!-- html marker for nav bar "testimonials" button/ could replace with navigation -->
+    <div id="testimonials"></div>
+
+    <!-- fourth parallax scrolly section -->
+    <div>
+        <div class="foreground-section">
+            <h1>Write a Review</h1>
+            <h3>...and see it displayed on the page</h3>
+
+            <!-- review submit form -->
+            <div class="container">
+                <form>
+                    <label for="fname">First Name</label>
+                    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+                    <label for="subject">Leave a Review</label>
+                    <textarea id="subject" name="subject" placeholder="Write something nice.." style="height:200px"></textarea>
+
+                    <button id="submit">submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+   
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+<script src='./assets/js/currentLocation.js'></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeSgY8rtEgnuzIXk_iKt5cLcsB0cjqs0s&callback=initMap">
+</script>
+</body>
+
+</html>

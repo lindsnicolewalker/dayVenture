@@ -1,0 +1,499 @@
+/* GENERAL */
+
+* {
+  box-sizing: border-box;
+
+}
+
+body, html {
+  /* font: 400 15px/1.8 "Lato", sans-serif;
+  color: #777; */
+  padding:0;
+  /* background-image: url("../images/image.jpg"); */
+  /* background-repeat: no-repeat; */
+  background-color:white;
+  font-family: 'Text Me One', sans-serif;
+
+
+}
+
+/* SMOOTH SCROLL FEATURE NAV BAR BUTTONS */
+
+html {
+  scroll-behavior: smooth;
+
+}
+
+
+/* NAV BAR STICKY FLEX */
+
+.display-flex{
+  display: flex;
+
+}
+
+.topnav {
+  position: sticky;
+  z-index: 1 !important;
+  overflow: hidden;
+  background-color:transparent;
+  display: flex;
+
+}
+
+.topnav a {
+  float: center;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 22px;
+
+}
+
+.topnav a:hover {
+  background-color: transparent;
+  color: white;
+  border-style:solid; 
+  border-width:2px; 
+  border-radius:50px;
+  border-color:white;
+
+}
+
+
+.lindsnav {
+  flex: 1;
+
+}
+
+/* VIDEO LOGO AND HERO TEXT */
+
+#myVideo{
+  /* opacity: .75; */
+  position:fixed;
+  width:100%; 
+  height:100%;
+  object-fit: cover; 
+  /* filter: blur(5px); */
+
+  /* clip: (0 0, 100% 0,100% 70%, 0 70%);    */
+  /* border-style:dashed;   */
+  /* clip-path: polygon(0 0, 100% 0, 100% 70%, 0 70%); */
+
+}
+
+video{
+ margin-bottom: 100px;
+}
+
+.vid-container{
+  width:100%; 
+  height:100%;
+  min-height: 600px; 
+
+}
+
+.hero-text{
+  position:absolute; 
+  top: 50%;
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  animation: fadeIn 3s ease-out; 
+  height: 30%; 
+  filter: brightness(0) invert(1);
+  text-align:center;
+
+}
+.topnav #hero-button{
+  color:black;
+  border-style: solid;
+  border-width:2px;
+  border-radius: 50px;
+  border-color:black;
+  display:inline-block;
+}
+
+
+.hero-text h1 {
+  color: black;
+  font-size: 50px;
+  /* border-style: solid;
+  border-width:2px;
+  border-radius: 50px;
+  border-color:white; */
+  opacity:.75;
+  /* background-color:#ddd;  */
+  padding:20px;
+
+}
+
+
+.caption{
+  color: white;
+  font-size: 50px;
+  /* border-style: solid;
+  border-width:2px;
+  border-radius: 50px;
+  border-color:white; */
+  /* opacity:.75;  */
+  /* background-color:#ddd;  */
+  /* /* padding:5px; */
+  position:relative;
+  top: 50%;
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  /* transform:translateY(-50%); */
+  animation: fadeIn 3s ease-out;  
+  /* filter: brightness(0) invert(1); */
+  /* text-align:center; */
+  display: inline-block; 
+  font-size: 50px;
+}
+
+.logo{
+  display: none;
+  top: -50%;
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  animation: fadeIn 3s ease-out; 
+  height: 75%; 
+  filter: brightness(0) invert(1);
+  position: absolute;
+
+}
+
+#submit{
+  border-style: solid;
+  border-width:1px;
+  border-color:white;
+  border-radius:50px; 
+}
+
+/* ANIMATIONS */
+
+@keyframes fadeIn {
+  0% {
+      opacity: 0; 
+      transform: translate(-50%, -50%); 
+      
+  }
+
+  100% {
+      opacity: .75;
+      transform: translate(-50%,-50% ); 
+
+  }
+}
+
+.foreground-section{
+  position:relative; 
+  color:#282E34;
+  background-color:#ddd;
+  text-align:center;
+  padding:50px 50px;
+  text-align: justify; 
+}
+
+/* BACKGROUND IMAGE TRANSFORMATIONS */
+/* 
+@keyframes kenburns {
+  0% {
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  95% {
+      transform: scale3d(1.5, 1.5, 1) translate3d(0px, 0px, 0px);
+      animation-timing-function: ease-in;
+      opacity: 1;
+  }
+  100% {
+      transform: scale3d(1.5, 1.5, 1.5) translate3d(-170px, -100px, 0px);
+      opacity: 0;
+  }
+} */
+
+/* PARALLAX BACKGROUND IMAGES */
+
+ .image0, .image1, .image2, .image3{
+  position: relative;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* filter: blur(10px); */
+
+}
+
+.image0 {
+  background-color: transparent; 
+  min-height: 250px;
+}
+
+.image1 {
+  background-color: transparent; 
+  min-height: 250px;
+
+}
+
+.image2 {
+  background-color: transparent; 
+  min-height: 250px;
+
+}
+
+.image3{
+  background-color: transparent; 
+  min-height: 250px;
+ 
+}
+
+/* ZOE CAROUSEL */
+#carousel-container{
+ width:100%;
+
+} 
+
+.owl-next{
+  float:right; 
+  transform: translateY(-250px);
+  position:relative;
+  right: -44px;
+
+}
+
+.owl-prev{
+  float:left; 
+  transform: translateY(-250px);
+  position:relative;
+  left: -44px;
+}
+
+#owl-demo .item {
+  background: black;
+  padding: 30px 0px;
+  display: block;
+  margin: 5px;
+  color: #fff;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  text-align: center;
+
+}
+
+#owl-demo .item {
+  margin: 3px;
+
+}
+
+.owl-carousel .owl-item img{
+  position:absolute; 
+  max-width:300px !important ;
+  width: 100% !important;
+  clip: rect(0px,200px,200px,0px);
+  display: -webkit-inline-flex;   
+
+}
+
+.owl-item{
+height: 300px; 
+max-width:300px;
+/* border-style:solid; 
+  border-color: white; 
+  border-width:5px; */
+}
+
+.card-item p {
+  position: absolute;
+  top: 260px;
+}
+
+.card-item a{
+  position: absolute;
+  top: 240px;
+}
+
+.owl-theme .owl-controls .owl-page {
+  display: inline-block;
+
+}
+
+.owl-theme .owl-controls .owl-page span {
+  background: none repeat scroll 0 0 #869791;
+  border-radius: 20px;
+  display: block;
+  height: 15px;
+  margin: 5px 7px;
+  /* opacity: 0.5; */
+  width: 15px;
+
+}
+
+.owl-prev span, .owl-next span {
+  width: 2rem;
+  font-size: 4rem;
+  top: 200px;
+}
+
+.owl-theme .owl-nav [class*=owl-]:hover {
+  background: none;
+  color: #000000;
+
+}
+
+.checked::before {
+  padding: 10px;
+  content: "\2713 ";
+  background: white;
+  color: white;
+  border: 2px solid white;
+  border-radius: 50%;
+  font-size: 20px;
+  position: absolute;
+  right: 20px;
+  font-family: 'Text Me One', sans-serif;
+  height: 50px;
+  width: 50px;
+  background-color: #555;
+  opacity:.5; 
+}
+
+.owl-theme .owl-dots .owl-dot span {
+  width: 100px;
+  height: 5px;
+  margin: 5px 7px;
+  background: #282E34;
+  display: block;
+  /* -webkit-backface-visibility: visible; */
+  transition: opacity .2s ease;
+  border-radius: 30px;
+}
+
+.itinerary-image {
+  max-width: 500px;
+  width: 100%;
+}
+
+.itinerary-activity > a {
+  display: block;
+}
+
+/* ZIPCODE INPUT FIELD */
+
+.zipcode-container {
+  flex:2;
+
+}
+
+#getstarted-button, button {
+  background-color: transparent;
+  color: black;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 20px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  }
+
+  #getstarted-button:hover, button:hover{
+  background-color: white;
+  color: black;
+  }
+
+/* testimonials input field */
+
+input[type=text], textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  box-sizing: border-box;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  resize: vertical;
+  color:black;
+  font-size:20px;
+}
+
+input[type=submit] {
+  background-color: transparent;
+  color: white;
+  /* padding: 6px 6px; */
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: white;
+  color: black;
+}
+
+label{
+  font-size: 20px;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: transparent;
+  padding: 20px;
+  
+}
+
+/* REVIEWS DISPLAY */
+/* #reviews-display{
+  font-size: 30px;
+  color: black;
+  background-color: #ddd;
+  opacity:.75;
+  position:relative; 
+  top: 50%;
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  animation: fadeIn 3s ease-out; 
+  /* border-style: solid;
+  border-radius:50px; 
+  border-color: white; 
+  border-width: 2px;
+  padding: 20px; */ 
+
+/* } */
+
+/* MEDIA QUERIES */
+
+/* Add responsiveness - On small screens, display the navbar vertically instead of horizontally */
+@media screen and (max-width: 600px) {
+  .topnav .zipcode-container {
+    float: none;
+    flex-direction: column; 
+  }
+}
+/* Turn off parallax scrolling for tablets and phones */
+@media only screen and (max-device-width: 1024px) {
+    .image0, .image1, .image2, .image3 {
+        background-attachment: scroll;
+    }
+}
+
+@media only screen and (max-width: 769px) {
+  .hero-text {
+    width: 90%;
+  }
+  .hero-text h1 {
+    font-size: 30px;
+  }
+  .caption {
+    padding: 20px;
+  }
+  .caption h1 {
+    font-size: 16px;
+  }
+  #city-selected-display {
+    margin-bottom: 80px;
+  }
+  .itinerary-heading {
+    font-size: 20px;
+  }
+}
